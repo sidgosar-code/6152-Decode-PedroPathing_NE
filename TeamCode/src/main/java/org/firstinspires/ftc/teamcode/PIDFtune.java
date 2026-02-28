@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
+@TeleOp
 public class PIDFtune extends OpMode
 {
     public DcMotorEx shooter;
@@ -19,18 +20,20 @@ public class PIDFtune extends OpMode
     double[] stepSizes = {10.0, 1.0, 0.1, 0.001, 0.0001};
 
     int stepIndex = 1;
+    @Override
     public void init()
     {
         shooter = hardwareMap.get(DcMotorEx.class,"shooter");
         shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         PIDFCoefficients pidf = new PIDFCoefficients(P, 0, 0, F);
-        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidf);
+        //shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidf);
         telemetry.addLine("Init complete.");
     }
     public void loop()
     {
         //get gamepad commands
         //set target velocity
+        shooter.setVelocity(curTargetVelocity);
         //update telemetry
         if(gamepad1.yWasPressed())
         {
