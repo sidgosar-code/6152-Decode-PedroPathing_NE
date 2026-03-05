@@ -15,10 +15,11 @@ public class PIDFtune extends OpMode
     public double highVelocity = 1500;
     public double lowVelocity = 900;
 
-    double curTargetVelocity = highVelocity;
+    //double curTargetVelocity = highVelocity;
+    static double curTargetVelocity = 0;
 
-    double F = 0;
-    double P = 0;
+    static double F = 0;
+    static double P = 0;
     double[] stepSizes = {10.0, 1.0, 0.1, 0.001, 0.0001};
 
     int stepIndex = 1;

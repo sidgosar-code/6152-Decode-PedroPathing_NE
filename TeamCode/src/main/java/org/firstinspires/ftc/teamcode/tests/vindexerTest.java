@@ -1,13 +1,16 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
+@Configurable
 public class vindexerTest extends OpMode
 {
     public Servo vindexer;
+    public static double A, B, C;
     @Override
     public void init()
     {
@@ -15,13 +18,18 @@ public class vindexerTest extends OpMode
     }
     public void loop()
     {
+        vindexer.setPosition(A);
         if(gamepad1.rightBumperWasPressed())
         {
-            vindexer.setPosition(0);
+            vindexer.setPosition(A);
         }
         if(gamepad1.dpadUpWasPressed())
         {
-            vindexer.setPosition(0.5);
+            vindexer.setPosition(B);
+        }
+        if(gamepad1.leftBumperWasPressed())
+        {
+            vindexer.setPosition(C);
         }
     }
 

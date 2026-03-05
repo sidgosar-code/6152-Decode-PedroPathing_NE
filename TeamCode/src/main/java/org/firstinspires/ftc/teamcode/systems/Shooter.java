@@ -16,7 +16,7 @@ public class Shooter
     public double curVelocity;
 
     public static final double F = 13.507;//for pidf
-    public static final double P = 65.0;//for pidf
+    public static final double P = 200;//for pidf
 
 
     PIDFCoefficients shooterPIDF;

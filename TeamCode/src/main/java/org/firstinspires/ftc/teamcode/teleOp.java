@@ -10,7 +10,7 @@ public class teleOp extends OpMode
     public void init()
     {
         robot = new RobotBase();
-        robot.initHardware(hardwareMap);
+        robot.initHardware(hardwareMap, telemetry);
     }
     public void loop()
     {

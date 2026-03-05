@@ -5,9 +5,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Sorting
 {
     public Servo vindexer;
-    public static final double A = 0.01;
-    public static final double B = 0.24;
-    public static final double C = 0.48;
+    public static final double A = 0.052;
+    public static final double B = 0.118;
+    public static final double C = 0.187;
     public Sorting(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
         vindexer = hardwareMap.get(Servo.class, "vindexer");
