@@ -6,11 +6,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.RobotBase;
 
-public class Shooting
+public class Shooter
 {
     public DcMotorEx shooter;
-    public Servo turret;
-    public Servo hood1;
+
     public boolean isOn;
     public static final double maxVelocity = 1750;
     public static final double minVelocity = 1450;
@@ -22,11 +21,9 @@ public class Shooting
 
     PIDFCoefficients shooterPIDF;
 
-    public Shooting(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
+    public Shooter(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
         shooter = hardwareMap.get(DcMotorEx.class, "shooter");
-        turret = hardwareMap.get(Servo.class, "turret");
-        hood1 = hardwareMap.get(Servo.class, "hood1");
         isOn = false;
 
         RobotBase.useEncoders(shooter);
@@ -36,10 +33,13 @@ public class Shooting
     public void set(double velocity)
     {
         shooter.setVelocity(velocity);
+        isOn = true;
+
     }
     public void stopShooter()
     {
         shooter.setVelocity(0);
+        isOn = false;
     }
     public double calculateVelocity(double distance)
     {

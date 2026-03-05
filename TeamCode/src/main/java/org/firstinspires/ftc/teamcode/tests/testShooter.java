@@ -14,14 +14,16 @@ public class testShooter extends OpMode
 {
     DcMotorEx shooter;
     DcMotor feed;
-    CRServo storage;
+    //CRServo storage;
+    DcMotor storage;
     public double velocity;
     @Override
     public void init()
     {
         shooter = hardwareMap.get(DcMotorEx.class,"shooter");
         feed = hardwareMap.get(DcMotor.class, "feed");
-        storage = hardwareMap.get(CRServo.class, "storage");
+        //storage = hardwareMap.get(CRServo.class, "storage");
+        storage = hardwareMap.get(DcMotor.class, "storage");
         feed.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         PIDFCoefficients pidf = new PIDFCoefficients(Values.P, 0, 0, Values.F);
@@ -34,7 +36,16 @@ public class testShooter extends OpMode
     }
     public void loop()
     {
-        shooter.setVelocity(velocity);
+        if(gamepad1.rightBumperWasPressed())
+        {
+            shooter.setVelocity(velocity);
+        }
+        if(gamepad1.leftBumperWasPressed())
+        {
+            shooter.setVelocity(0);
+        }
+
+        //shooter.setVelocity(velocity);
         if(gamepad1.dpadUpWasPressed())
         {
             velocity += 50;

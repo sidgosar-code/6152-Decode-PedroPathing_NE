@@ -17,12 +17,10 @@ public class teleOp extends OpMode
         if(gamepad1.rightBumperWasPressed() && !robot.shooter.isOn)
         {
             robot.shooter.set(robot.shooter.curVelocity);
-            robot.shooter.isOn = true;
         }
         if(gamepad1.rightBumperWasPressed() && robot.shooter.isOn)
         {
             robot.shooter.set(robot.shooter.curVelocity);
-            robot.shooter.isOn = false;
         }
 
     }
