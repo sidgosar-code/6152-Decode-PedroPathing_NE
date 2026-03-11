@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import org.firstinspires.ftc.teamcode.RobotBase;
 
 public class teleOp extends OpMode
 {
@@ -14,13 +13,14 @@ public class teleOp extends OpMode
     }
     public void loop()
     {
-        if(gamepad1.rightBumperWasPressed() && !robot.shooter.isOn)
+        if(gamepad1.rightBumperWasPressed())
         {
-            robot.shooter.set(robot.shooter.curVelocity);
+            robot.shooter.setShooter();
+            robot.setTelemetry("speedIndex", robot.shooter.speedIndex);
         }
-        if(gamepad1.rightBumperWasPressed() && robot.shooter.isOn)
+        if(gamepad1.leftBumperWasPressed())
         {
-            robot.shooter.set(robot.shooter.curVelocity);
+            robot.shooter.stopShooter();
         }
 
     }
