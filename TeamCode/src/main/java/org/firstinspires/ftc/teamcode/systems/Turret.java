@@ -77,6 +77,6 @@ public class Turret
 
     public void hoodHigh(){hood1.setPosition(hoodMax);}
     public void hoodLow(){hood1.setPosition(hoodMin);}
-    public void hoodIncUp(){hood1.setPosition(hood1.getPosition()-hoodInc);}
-    public void hoodIncDown(){hood1.setPosition(hood1.getPosition()+hoodInc);}
+    public void hoodIncUp(){if(hood1.getPosition()<hoodMax)hood1.setPosition(hood1.getPosition()-hoodInc);}
+    public void hoodIncDown(){if(hood1.getPosition()>hoodMin)hood1.setPosition(hood1.getPosition()+hoodInc);}
 }

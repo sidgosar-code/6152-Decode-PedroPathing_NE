@@ -29,7 +29,7 @@ public class Transfer
     public ElapsedTime timer;
     Telemetry telemetry;
 
-    public Transfer(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
+    public Transfer(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
         feed = hardwareMap.get(DcMotor.class, "feed");
         flicker = hardwareMap.get(Servo.class, "flicker");
@@ -41,7 +41,6 @@ public class Transfer
         RobotBase.useEncoders(storage);
 
         timer = new ElapsedTime();
-        this.telemetry = telemetry;
 
     }
     public void flickOne()
@@ -50,7 +49,7 @@ public class Transfer
         flicker.setPosition(flickerPush);
         while(timer.milliseconds()<flickWait)
         {
-            telemetry.addLine("flicking");
+            RobotBase.setTelemetry1("flicking");
         }
         flicker.setPosition(flickerRest);
     }

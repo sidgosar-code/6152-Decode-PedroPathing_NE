@@ -17,14 +17,9 @@ public class intakeTest extends OpMode
     }
     public void loop()
     {
-        if(gamepad1.bWasPressed()) robot.intake.startIntake();
-        //if(gamepad1.bWasReleased()) robot.intake.stopIntake();
+        if(gamepad1.b) robot.intake.startIntake();
+        else robot.intake.stopIntake();
         if(gamepad1.a) robot.intake.outTake();
         else robot.intake.stopIntake();
-
-        if(gamepad1.x) robot.intake.start();
-        else robot.intake.intake.setVelocity(0);
-        //else robot.intake.stopIntake();
-
     }
 }

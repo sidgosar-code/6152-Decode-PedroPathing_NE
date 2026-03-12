@@ -18,6 +18,8 @@ public class RobotBase
     public Intake intake;
     public Turret turret;
     public Telemetry telemetry;
+    
+    public static Telemetry telemetry1;
 
     //constructor here
     public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
@@ -26,12 +28,13 @@ public class RobotBase
     }
     public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
     {
-        transfer = new Transfer(hardwareMap, telemetry);
+        transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
         turret = new Turret(hardwareMap);
         sorting = new Sorting(hardwareMap, transfer);
         intake = new Intake(hardwareMap);
         this.telemetry = telemetry;
+        telemetry1 = telemetry;
     }
 
     public void setTelemetry(String caption, double data)
@@ -43,6 +46,16 @@ public class RobotBase
     {
         telemetry.addLine(line);
         telemetry.update();
+    }
+    public static void setTelemetry1(String caption, double data)
+    {
+        telemetry1.addData(caption, data);
+        telemetry1.update();
+    }
+    public static void setTelemetry1(String line)
+    {
+        telemetry1.addLine(line);
+        telemetry1.update();
     }
 
     //encoder switching methods, overloaded for DcMotorEx
