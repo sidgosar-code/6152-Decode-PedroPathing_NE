@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.systems;
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -16,13 +17,15 @@ public class Transfer
     public DcMotor storage;
     public Servo flicker;
 
-    public static double feedReg, storageReg = 0.7;
-    public static double feedMax, storageMax = 0.9;
-    public static double feedIntake = 0.3;
+    public static double feedReg = 0.7;
+    public static double storageReg = 0.7;
+    public static double feedMax  = 0.9;
+    public  static double storageMax = 0.9;
+    public static double feedIntake = 0.1;
 
-    public static final double flickerRest = 0.1;
-    public static final double flickerPush = 0.4;
-    public static final double flickWait = 500; //time to wait for flickerPush, in ms
+    public static final double flickerRest = 0.625;
+    public static final double flickerPush = flickerRest + 0.125;
+    public static double flickWait = 300; //time to wait for flickerPush, in ms
     public ElapsedTime timer;
     Telemetry telemetry;
 
@@ -32,6 +35,7 @@ public class Transfer
         flicker = hardwareMap.get(Servo.class, "flicker");
         //storage = hardwareMap.get(CRServo.class, "storage");
         storage = hardwareMap.get(DcMotor.class, "storage");
+        storage.setDirection(DcMotor.Direction.REVERSE);
 
         RobotBase.useEncoders(feed);
         RobotBase.useEncoders(storage);
@@ -80,6 +84,11 @@ public class Transfer
     {
         stopFeed();
         stopStorage();
+    }
+    public void out()
+    {
+        feed.setPower(-feedMax);
+        storage.setPower(-storageMax);
     }
 
 
