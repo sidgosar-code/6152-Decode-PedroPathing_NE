@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.unused.Values;
 
@@ -14,6 +15,7 @@ public class testShooter extends OpMode
 {
     DcMotorEx shooter;
     DcMotor feed;
+    Servo hood1; public static double hoodMin = 0.67; public static double hoodMax = 0.60;
     //CRServo storage;
     DcMotor storage;
     TelemetryManager telemetryM;
@@ -25,6 +27,8 @@ public class testShooter extends OpMode
         feed = hardwareMap.get(DcMotor.class, "feed");
         //storage = hardwareMap.get(CRServo.class, "storage");
         storage = hardwareMap.get(DcMotor.class, "storage");
+        hood1 = hardwareMap.get(Servo.class, "hood1");
+        hood1.setDirection(Servo.Direction.REVERSE);
         storage.setDirection(DcMotor.Direction.REVERSE);
         feed.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
@@ -69,6 +73,14 @@ public class testShooter extends OpMode
         }
         else {
             storage.setPower(0);
+        }
+        if(gamepad1.dpadLeftWasPressed())
+        {
+            hood1.setPosition(hoodMin);
+        }
+        if(gamepad1.dpadRightWasPressed())
+        {
+            hood1.setPosition(hoodMax);
         }
         telemetry.addData("Velocity", velocity);
         telemetry.addData("realVelocity", shooter.getVelocity());
