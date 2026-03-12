@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class flickerTest extends OpMode
 {
     public Servo flicker;
-    public static double zero = 0;
-    public static double push = 0.1;
+    public static double zero = 0.625;
+    public static double push = zero + 0.125;
     @Override
     public void init()
     {

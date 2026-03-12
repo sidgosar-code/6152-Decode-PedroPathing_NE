@@ -5,17 +5,43 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.RobotBase;
 
-@TeleOp
+@TeleOp()
 public class systemsTest extends OpMode
 {
     public RobotBase robot;
     @Override
     public void init()
     {
-        robot = new RobotBase();
+        robot = new RobotBase(hardwareMap, telemetry);
+        robot.initHardware(hardwareMap, telemetry);
     }
     public void loop()
     {
+        robot.setTelemetry("shooter velocity", robot.shooter.shooter.getVelocity());
+        robot.setTelemetry("shooter velocity", robot.shooter.curVelocity);
+        if(gamepad1.aWasPressed())
+        {
+            /*
+            if(robot == null)
+            {
+                telemetry.addLine("robot is null");
+            }
+            if(robot.shooter == null)
+            {
+                telemetry.addLine("shooter is null");
+            }
 
+
+            else*/ robot.shooter.setShooter();
+        }
+        if(gamepad1.bWasPressed())
+        {
+            robot.shooter.stopShooter();
+        }
+        if(gamepad1.right_trigger>0)
+        {
+            robot.intake.startIntake();
+        }
     }
+
 }

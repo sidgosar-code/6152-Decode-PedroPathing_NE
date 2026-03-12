@@ -20,6 +20,10 @@ public class RobotBase
     public Telemetry telemetry;
 
     //constructor here
+    public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
+    {
+        initHardware(hardwareMap, telemetry);
+    }
     public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
     {
         transfer = new Transfer(hardwareMap, telemetry);

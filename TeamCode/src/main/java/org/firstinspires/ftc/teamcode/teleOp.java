@@ -8,8 +8,8 @@ public class teleOp extends OpMode
     @Override
     public void init()
     {
-        robot = new RobotBase();
-        robot.initHardware(hardwareMap, telemetry);
+        robot = new RobotBase(hardwareMap, telemetry);
+
     }
     public void loop()
     {

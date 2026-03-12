@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.systems;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -7,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotBase;
-
+@Configurable
 public class Transfer
 {
     public DcMotor feed;
@@ -15,9 +16,9 @@ public class Transfer
     public DcMotor storage;
     public Servo flicker;
 
-    public  double feedReg, storageReg = 0.7;
-    public double feedMax, storageMax = 0.9;
-    public double feedIntake = 0.3;
+    public static double feedReg, storageReg = 0.7;
+    public static double feedMax, storageMax = 0.9;
+    public static double feedIntake = 0.3;
 
     public static final double flickerRest = 0.1;
     public static final double flickerPush = 0.4;
