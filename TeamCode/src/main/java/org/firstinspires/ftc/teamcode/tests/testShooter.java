@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.bylazar.telemetry.TelemetryManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -11,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.unused.Values;
 
 @TeleOp
+@Configurable
 public class testShooter extends OpMode
 {
     DcMotorEx shooter;
@@ -19,6 +21,7 @@ public class testShooter extends OpMode
     //CRServo storage;
     DcMotor storage;
     TelemetryManager telemetryM;
+    public static double feedP = 0.7;
     public double velocity;
     @Override
     public void init()
@@ -62,7 +65,7 @@ public class testShooter extends OpMode
         }
         if(gamepad1.b)
         {
-            feed.setPower(0.7);
+            feed.setPower(feedP);
         }
         else {
             feed.setPower(0);

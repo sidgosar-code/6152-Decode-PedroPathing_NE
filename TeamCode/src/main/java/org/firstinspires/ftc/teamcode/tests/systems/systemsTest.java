@@ -19,7 +19,7 @@ public class systemsTest extends OpMode
     {
         robot.setTelemetry("shooter velocity", robot.shooter.shooter.getVelocity());
         robot.setTelemetry("shooter velocity", robot.shooter.curVelocity);
-        if(gamepad1.aWasPressed())
+        if(gamepad1.a)
         {
             /*
             if(robot == null)
@@ -34,6 +34,7 @@ public class systemsTest extends OpMode
 
             else*/ robot.shooter.setShooter();
         }
+        else robot.shooter.stopShooter();
         if(gamepad1.bWasPressed())
         {
             robot.shooter.stopShooter();

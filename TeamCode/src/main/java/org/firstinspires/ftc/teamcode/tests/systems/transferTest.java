@@ -17,6 +17,8 @@ public class transferTest extends OpMode
     }
     public void loop()
     {
+
+        //everything works, will just have to be start/stop, no hold
         if(gamepad1.left_trigger>0) robot.transfer.fullTransfer();
         else robot.transfer.stopAll();
         if(gamepad1.leftBumperWasPressed()) robot.transfer.stopAll();
