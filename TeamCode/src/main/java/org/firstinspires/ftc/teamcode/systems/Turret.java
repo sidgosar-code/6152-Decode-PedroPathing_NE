@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.systems;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Turret
@@ -7,7 +10,6 @@ public class Turret
     public Servo turret;
     public static final double rotLeft = LEFT (~0?);
     public static final double rotRight = RIGHT (~0.4?);
-
     public static final double turretInc = 0.01;
     public Servo hood1;
     public static final double hoodMin = 0.67;
@@ -54,6 +56,23 @@ public class Turret
             turret.setPosition(turret.getPosition() - turretInc);
             if (turret.getPosition() < rots[currentRot - 1]) {currentRot--;}
         }
+    }
+    public double calcRealX()
+    {
+        return odometry.getX-3*cos(odometry.getHeading)-4*sin(odometry.getHeading));
+    }
+    public void calcRealY(double realX)
+    {
+        if(heading > 36.87 && heading < 216.87) {return -(odometry.getY-Math.sqrt(25-(3*cos(odometry.getHeading)+4*sin(odometry.getHeading))^2));}
+        else {return odometry.getY-Math.sqrt(25-(3*cos(odometry.getHeading)+4*sin(odometry.getHeading))^2);}
+    }
+    public void getDistanceBlue(double realX, double realY)
+    {
+        return Math.atan2(8.108640-realX, 133.196421-realY) + heading_offset;
+    }
+    public void getDistanceRed(double realX, double realY)
+    {
+        return Math.atan2(144-8.108640-realX, 133.196421-realY) + heading_offset;
     }
 
     public void hoodHigh(){hood1.setPosition(hoodMax);}

@@ -29,7 +29,7 @@ public class RobotBase
         transfer = new Transfer(hardwareMap, telemetry);
         shooter = new Shooter(hardwareMap);
         turret = new Turret(hardwareMap);
-        sorting = new Sorting(hardwareMap);
+        sorting = new Sorting(hardwareMap, transfer);
         intake = new Intake(hardwareMap);
         this.telemetry = telemetry;
     }
