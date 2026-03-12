@@ -5,10 +5,59 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Turret
 {
     public Servo turret;
+    public static final double rotLeft = LEFT (~0?);
+    public static final double rotRight = RIGHT (~0.4?);
+
+    public static final double turretInc = 0.01;
     public Servo hood1;
+    public static final double hoodMin = 0.67;
+    public static final double hoodMax = 0.60;
+    public static final double hoodInc = 0.01;
+    public static final double[] rots = new double[] {rotLeft, (3*rotLeft+rotRight)/4, (rotLeft+rotRight)/2,
+        (rotLeft+3*rotRight)/4, rotRight};
+    public static int currentRot = 0;
     public Turret(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
         turret = hardwareMap.get(Servo.class, "turret");
         hood1 = hardwareMap.get(Servo.class, "hood1");
     }
+    public void turretLeft()
+    {
+        if(currentRot>0)
+        {
+            turret.setPosition(rots[currentRot-1]);
+            currentRot--;
+        }
+        else {turret.setPosition(rots[0]);};
+    }
+    public void turretRight()
+    {
+        if(currentRot<4)
+        {
+            turret.setPosition(rots[currentRot+1]);
+            currentRot++;
+        }
+        else {turret.setPosition(rots[4]);};
+    }
+    public void turretIncRight()
+    {
+        if(turret.getPosition()<rotRight-turretInc)
+        {
+            turret.setPosition(turret.getPosition() + turretInc);
+            if (turret.getPosition() > rots[currentRot + 1]) {currentRot++;}
+        }
+    }
+    public void turretIncLeft()
+    {
+        if(turret.getPosition()>rotLeft+turretInc)
+        {
+            turret.setPosition(turret.getPosition() - turretInc);
+            if (turret.getPosition() < rots[currentRot - 1]) {currentRot--;}
+        }
+    }
+
+    public void hoodHigh(){hood1.setPosition(hoodMax);}
+    public void hoodLow(){hood1.setPosition(hoodMin);}
+    public void hoodIncUp(){hood1.setPosition(hood1.getPosition()-hoodInc);}
+    public void hoodIncDown(){hood1.setPosition(hood1.getPosition()+hoodInc);}
 }
