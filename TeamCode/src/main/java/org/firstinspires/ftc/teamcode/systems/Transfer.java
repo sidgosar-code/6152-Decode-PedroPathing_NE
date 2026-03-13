@@ -53,6 +53,7 @@ public class Transfer
         }
         flicker.setPosition(flickerRest);
     }
+
     public void fullTransfer()
     {
         startFeed();

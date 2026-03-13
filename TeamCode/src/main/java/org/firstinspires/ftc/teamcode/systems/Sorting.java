@@ -17,7 +17,8 @@ public class Sorting
     public static final double C = 0.187;
 
     public ElapsedTime timer;
-    public static double vindexerWait = 500;
+    public static double vindexerWaitTime = 500;
+    public static double flickOneWaitTime = 500;
 
     public Telemetry telemetry;
     public Sorting(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Transfer transfer)
@@ -77,15 +78,15 @@ public class Sorting
 
     private void vindexerPositions(double pos1, double pos2, double pos3)
     {
-        vindexer.setPosition(pos1); vindexerWait(); transfer.flickOne();
-        vindexer.setPosition(pos2); vindexerWait(); transfer.flickOne();
-        vindexer.setPosition(pos3); vindexerWait(); transfer.flickOne();
+        vindexer.setPosition(pos1); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
+        vindexer.setPosition(pos2); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
+        vindexer.setPosition(pos3); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
     }
 
-    public void vindexerWait()
+    public void waitTime(double time)
     {
         timer.reset();
-        while(timer.milliseconds()<vindexerWait)
+        while(timer.milliseconds()<time)
         {
             int m = 4;
         }
