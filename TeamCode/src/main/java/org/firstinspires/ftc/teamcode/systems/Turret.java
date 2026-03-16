@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.systems;
 
 import static java.lang.Math.cos;
@@ -16,7 +17,7 @@ public class Turret
     public static final double hoodMax = 0.60;
     public static final double hoodInc = 0.01;
     public static final double[] rots = new double[] {rotLeft, (3*rotLeft+rotRight)/4, (rotLeft+rotRight)/2,
-        (rotLeft+3*rotRight)/4, rotRight};
+            (rotLeft+3*rotRight)/4, rotRight};
     public static int currentRot = 0;
     public Turret(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
@@ -80,3 +81,5 @@ public class Turret
     public void hoodIncUp(){if(hood1.getPosition()<hoodMax)hood1.setPosition(hood1.getPosition()-hoodInc);}
     public void hoodIncDown(){if(hood1.getPosition()>hoodMin)hood1.setPosition(hood1.getPosition()+hoodInc);}
 }
+
+ */
