@@ -18,7 +18,7 @@ public class Shooter
     public double curVelocity;
     public static double[] speeds = {minVelocity, midVelocity, farVelocity};
     public int speedIndex = 1;
-    public static final double F = 15.9086;//for pidf
+    public static final double F = 14.25;//for pidf
     public static final double P = 175;//for pidf
 
     public double x, y, heading;

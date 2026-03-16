@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.systems.AprilTagUtility;
 import org.firstinspires.ftc.teamcode.systems.Intake;
 import org.firstinspires.ftc.teamcode.systems.Shooter;
 import org.firstinspires.ftc.teamcode.systems.Sorting;
@@ -21,13 +22,16 @@ public class RobotBase
     
     public static Telemetry telemetry1;
 
+    public AprilTagUtility aprilTagUtility;
+
     //constructor here
-    public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
+    public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, boolean isBlue)
     {
-        initHardware(hardwareMap, telemetry);
+        initHardware(hardwareMap, telemetry, isBlue);
     }
-    public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
+    public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, boolean isBlue)
     {
+        aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry, isBlue);
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
         //turret = new Turret(hardwareMap);
@@ -63,4 +67,10 @@ public class RobotBase
     public static void useEncoders(DcMotor motor) {motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);}
     public static void noEncoders(DcMotorEx motor) {motor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);motor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);}
     public static void noEncoders(DcMotor motor) {motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);}
+
+    public void farZoneShoot3()
+    {
+        shooter.setShooter();
+    }
+
 }

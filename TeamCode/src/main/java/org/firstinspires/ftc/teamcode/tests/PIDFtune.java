@@ -27,7 +27,7 @@ public class PIDFtune extends OpMode
     @Override
     public void init()
     {
-        shooter = hardwareMap.get(DcMotorEx.class,"intake");
+        shooter = hardwareMap.get(DcMotorEx.class,"shooter");
         shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter.setDirection(DcMotorEx.Direction.REVERSE);
         PIDFCoefficients pidf = new PIDFCoefficients(P, 0, 0, F);
