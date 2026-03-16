@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.systems.Intake;
 import org.firstinspires.ftc.teamcode.systems.Shooter;
 import org.firstinspires.ftc.teamcode.systems.Sorting;
 import org.firstinspires.ftc.teamcode.systems.Transfer;
-import org.firstinspires.ftc.teamcode.systems.Turret;
+//import org.firstinspires.ftc.teamcode.systems.Turret;
 
 public class RobotBase
 {
@@ -16,7 +16,7 @@ public class RobotBase
     public Transfer transfer;
     public Sorting sorting;
     public Intake intake;
-    public Turret turret;
+    //public Turret turret;
     public Telemetry telemetry;
     
     public static Telemetry telemetry1;
@@ -30,7 +30,7 @@ public class RobotBase
     {
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
-        turret = new Turret(hardwareMap);
+        //turret = new Turret(hardwareMap);
         sorting = new Sorting(hardwareMap, transfer);
         intake = new Intake(hardwareMap);
         this.telemetry = telemetry;

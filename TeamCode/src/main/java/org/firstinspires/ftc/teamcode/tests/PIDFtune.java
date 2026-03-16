@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 @Configurable
@@ -12,8 +13,8 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 public class PIDFtune extends OpMode
 {
     public DcMotorEx shooter;
-    public double highVelocity = 1500;
-    public double lowVelocity = 900;
+    public static double highVelocity = 1500;
+    public static double lowVelocity = 900;
 
     //double curTargetVelocity = highVelocity;
     static double curTargetVelocity = 0;
@@ -26,8 +27,9 @@ public class PIDFtune extends OpMode
     @Override
     public void init()
     {
-        shooter = hardwareMap.get(DcMotorEx.class,"shooter");
+        shooter = hardwareMap.get(DcMotorEx.class,"intake");
         shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooter.setDirection(DcMotorEx.Direction.REVERSE);
         PIDFCoefficients pidf = new PIDFCoefficients(P, 0, 0, F);
         //shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidf);
         telemetry.addLine("Init complete.");
