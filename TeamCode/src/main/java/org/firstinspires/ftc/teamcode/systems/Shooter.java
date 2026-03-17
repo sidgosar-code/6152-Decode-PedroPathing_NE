@@ -12,9 +12,13 @@ public class Shooter
 
     public static int minInd = 1;
 
-    public static final double farVelocity = 1750;
-    public static final double midVelocity = 1500;
-    public static final double minVelocity = 1400;
+    public static double shoot2 = 200; //time to shoot 2 balls before flicking, in ms
+    public static double shootPrep = 300; // time to aim turret, fix hood, and shooter to get up to speed, in ms
+    public static double toSpeed = 500; // time for shooter to reach desired velocity, in ms
+
+    public static double farVelocity = 1750;
+    public static double midVelocity = 1500;
+    public static double minVelocity = 1400;
     public double curVelocity;
     public static double[] speeds = {minVelocity, midVelocity, farVelocity};
     public int speedIndex = 1;
@@ -55,7 +59,7 @@ public class Shooter
         {
             return speeds[0];
         }
-        if(distance>40 && distance <=100)
+        if(distance>40 && distance <=115)
         {
             return speeds[1];
         }

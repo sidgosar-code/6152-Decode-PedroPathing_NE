@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.systems.Shooter;
 import org.firstinspires.ftc.teamcode.unused.Values;
 
 @TeleOp
@@ -35,7 +36,7 @@ public class testShooter extends OpMode
         storage.setDirection(DcMotor.Direction.REVERSE);
         feed.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        PIDFCoefficients pidf = new PIDFCoefficients(Values.P, 0, 0, Values.F);
+        PIDFCoefficients pidf = new PIDFCoefficients(Shooter.P, 0, 0, Shooter.F);
         shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidf);
         velocity = 1500;
 
