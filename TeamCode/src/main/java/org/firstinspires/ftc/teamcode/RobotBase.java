@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.systems.AprilTagUtility;
 import org.firstinspires.ftc.teamcode.systems.Intake;
+import org.firstinspires.ftc.teamcode.systems.Movement;
 import org.firstinspires.ftc.teamcode.systems.Shooter;
 import org.firstinspires.ftc.teamcode.systems.Sorting;
 import org.firstinspires.ftc.teamcode.systems.Transfer;
@@ -21,11 +22,10 @@ public class RobotBase
     public Intake intake;
     public Turret turret;
     public Telemetry telemetry;
-    
     public static Telemetry telemetry1;
 
     public AprilTagUtility aprilTagUtility;
-
+    public Movement movement;
     public ElapsedTime timer;
 
     //constructor here
@@ -45,6 +45,7 @@ public class RobotBase
         turret = new Turret(hardwareMap, aprilTagUtility);
         sorting = new Sorting(hardwareMap, transfer);
         intake = new Intake(hardwareMap);
+        movement = new Movement(hardwareMap);
         this.telemetry = telemetry;
         telemetry1 = telemetry;
         timer = new ElapsedTime();
@@ -57,6 +58,7 @@ public class RobotBase
         sorting = new Sorting(hardwareMap, transfer);
         intake = new Intake(hardwareMap);
         this.telemetry = telemetry;
+        movement = new Movement(hardwareMap);
         telemetry1 = telemetry;
         timer = new ElapsedTime();
     }
@@ -91,6 +93,24 @@ public class RobotBase
     public void farZoneShoot3()
     {
         shooter.setShooter();
+        transfer.startStorage();
+        transfer.feedOne();
+        waitTime(Shooter.toSpeed);
+        transfer.feedOne();
+        transfer.flickOne();
+        waitTime(Shooter.toSpeed - Transfer.flickWait);
+        transfer.fullTransfer();
+    }
+    public void shoot3()
+    {
+        shooter.setShooter();
+        turret.aimTurret();
+        turret.hoodLow();
+        waitTime(Shooter.shootPrep);
+        transfer.fullTransfer();
+        waitTime(Shooter.shoot2);
+        intake.startIntake();
+        transfer.flickOne();
     }
 
     public void waitTime(double time)//time in ms
@@ -101,6 +121,13 @@ public class RobotBase
             int m = 4;
         }
         return;
+    }
+
+    public void stopALl()
+    {
+        shooter.stopShooter();
+        transfer.stopAll();
+        intake.stopIntake();
     }
 
 }

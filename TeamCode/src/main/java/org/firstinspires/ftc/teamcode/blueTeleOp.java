@@ -8,6 +8,7 @@ public class blueTeleOp extends OpMode
 {
     public RobotBase robot;
     double x, y, rotation;
+
     @Override
     public void init()
     {
@@ -19,6 +20,8 @@ public class blueTeleOp extends OpMode
         y = gamepad1.left_stick_y;
         rotation = gamepad1.right_stick_x;
 
+        if(gamepad1.right_trigger > 0) robot.movement.slowTeleOpDrive(x, y, rotation);
+        else robot.movement.teleOpDrive(x, y, rotation);
 
 
         if(gamepad2.rightBumperWasPressed())
@@ -39,6 +42,8 @@ public class blueTeleOp extends OpMode
         if(gamepad2.yWasPressed()) robot.transfer.flickOne();
         if(gamepad2.dpad_down) robot.transfer.fullTransfer();
         else robot.transfer.stopAll();
+
+
 
 
     }

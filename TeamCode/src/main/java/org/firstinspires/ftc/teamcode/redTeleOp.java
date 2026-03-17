@@ -19,6 +19,9 @@ public class redTeleOp extends OpMode
         y = gamepad1.left_stick_y;
         rotation = gamepad1.right_stick_x;
 
+        if(gamepad1.right_trigger > 0) robot.movement.slowTeleOpDrive(x, y, rotation);
+        else robot.movement.teleOpDrive(x, y, rotation);
+
 
 
         if(gamepad2.rightBumperWasPressed())
