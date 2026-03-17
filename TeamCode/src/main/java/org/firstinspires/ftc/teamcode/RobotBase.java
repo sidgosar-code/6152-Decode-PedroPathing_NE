@@ -24,6 +24,8 @@ public class RobotBase
     public Telemetry telemetry;
     public static Telemetry telemetry1;
 
+    //public ModeManager modeManager;
+
     public AprilTagUtility aprilTagUtility;
     public Movement movement;
     public ElapsedTime timer;
@@ -40,11 +42,12 @@ public class RobotBase
     public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, boolean isBlue)
     {
         aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry, isBlue);
+        //modeManager = new ModeManager();
         transfer = new Transfer(hardwareMap);
         shooter = new Shooter(hardwareMap);
         turret = new Turret(hardwareMap, aprilTagUtility);
         sorting = new Sorting(hardwareMap, transfer);
-        intake = new Intake(hardwareMap);
+        intake = new Intake(hardwareMap, transfer);
         movement = new Movement(hardwareMap);
         this.telemetry = telemetry;
         telemetry1 = telemetry;
@@ -56,7 +59,7 @@ public class RobotBase
         shooter = new Shooter(hardwareMap);
         //turret = new Turret(hardwareMap, aprilTagUtility);
         sorting = new Sorting(hardwareMap, transfer);
-        intake = new Intake(hardwareMap);
+        intake = new Intake(hardwareMap, transfer);
         this.telemetry = telemetry;
         movement = new Movement(hardwareMap);
         telemetry1 = telemetry;

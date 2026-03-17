@@ -1,18 +1,18 @@
 package org.firstinspires.ftc.teamcode.systems;
 
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.robot.Robot;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotBase;
+import org.firstinspires.ftc.teamcode.unused.ModeManager;
 
 public class Sorting
 {
     public Servo vindexer;
     public Transfer transfer;
 
-    public static final double A = 0.052;
+       public static final double A = 0.052;
     public static final double B = 0.118;
     public static final double C = 0.187;
 
@@ -33,11 +33,11 @@ public class Sorting
     }
     public void vindexerB()
     {
-        vindexer.setPosition(B);
+        if(transfer.sortMode)vindexer.setPosition(B);
     }
     public void vindexerC()
     {
-        vindexer.setPosition(C);
+        if(transfer.sortMode)vindexer.setPosition(C);
     }
     public void vindexerABC()
     {

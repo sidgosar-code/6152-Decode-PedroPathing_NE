@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode.systems;
 
 import com.bylazar.configurables.annotations.Configurable;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotBase;
+import org.firstinspires.ftc.teamcode.unused.ModeManager;
+
 @Configurable
 public class Transfer
 {
@@ -16,6 +16,8 @@ public class Transfer
     //public CRServo storage;
     public DcMotor storage;
     public Servo flicker;
+
+    public boolean sortMode, spamMode;
 
     public static double feedReg = 0.7;
     public static double storageReg = 0.7;
@@ -43,6 +45,9 @@ public class Transfer
 
         timer = new ElapsedTime();
 
+        sortMode = true;
+        spamMode = false;
+
     }
     public void flickOne()
     {
@@ -54,6 +59,7 @@ public class Transfer
         }
         flicker.setPosition(flickerRest);
     }
+
 
     public void fullTransfer()
     {
@@ -101,6 +107,22 @@ public class Transfer
     {
         feed.setPower(-feedMax);
         storage.setPower(-storageMax);
+    }
+
+    public void intake()
+    {
+        if(sortMode)storage.setPower(-storageReg);
+        else if(spamMode)
+        {
+            startIntakeMode();
+        }
+    }
+
+    public void switchMode()
+    {
+        sortMode = !sortMode;
+        spamMode = !spamMode;
+        RobotBase.setTelemetry1("sortMode" + sortMode);
     }
 
 
