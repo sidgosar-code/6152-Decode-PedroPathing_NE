@@ -18,7 +18,7 @@ import java.util.List;
 
 public class AprilTagUtility
 {
-    public boolean blue;
+    public boolean isBlue;
 
     public int goalID;
     public AprilTagDetection goalTag;
@@ -124,8 +124,9 @@ public class AprilTagUtility
 
     public void setColor(boolean isBlue)//always true if blue
     {
-        if(isBlue){ blue = true; setGoalID(20);}
-        else {blue = false; setGoalID(24);}
+        if(isBlue){ this.isBlue = true; setGoalID(20);}
+        else {
+            this.isBlue = false; setGoalID(24);}
     }
     private void setGoalID(int id)
     {

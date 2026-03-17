@@ -1,4 +1,4 @@
-/*
+package org.firstinspires.ftc.teamcode.systems;/*
 
 
 package org.firstinspires.ftc.teamcode.systems;
@@ -85,3 +85,90 @@ public class Turret
 }
 
  */
+
+import com.bylazar.configurables.annotations.Configurable;
+import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.RobotBase;
+
+@Configurable
+public class Turret
+{
+    public Servo turret;
+    public Servo hood1;
+
+    public AprilTagUtility aprilTagUtility;
+    public static double center = 0;
+    public static double right = 0.03;
+    public static double left = 0.47;
+
+    public static double cameraShooterOffset = 7; //inches
+
+    public double cameraAimAngle, aimAngle, aimPosition, distance;
+    public static double turretMultiplier = 1;
+    public static double hoodMin = 0.67;
+    public static double hoodMax = 0.60;
+    public Turret(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, AprilTagUtility aprilTagUtility)
+    {
+        turret = hardwareMap.get(Servo.class, "turret");
+        hood1 = hardwareMap.get(Servo.class, "hood1");
+        this.aprilTagUtility = aprilTagUtility;
+        aimPosition = center;
+    }
+
+    public void hoodHigh(){hood1.setPosition(hoodMax);}
+    public void hoodLow(){hood1.setPosition(hoodMin);}
+
+    public void update()
+    {
+
+        cameraAimAngle = aprilTagUtility.getAngleToGoal();
+        aimAngle = cameraAngleToAim(cameraAimAngle);
+        RobotBase.setTelemetry1("aimAngle", aimAngle);
+    }
+
+     /**
+     * this method is used to account for the fact that the shooter and the camera are not in the same place,
+      * which could account for some discrepancies in the aimAngle
+     * @param angle made by the camera and the goal
+     * @return angle made by the shooter and the goal
+     */
+    private double cameraAngleToAim(double angle)
+    {
+        double cameraDistance = aprilTagUtility.getDistanceToGoal();//angle from camera to goal
+        RobotBase.setTelemetry1("camera range",cameraDistance);
+        double curRadAngle = 90 + Math.toRadians(angle);//helper angle
+        distance = Math.sqrt( (cameraDistance * cameraDistance + cameraShooterOffset * cameraShooterOffset - 2*distance*cameraShooterOffset * Math.cos(curRadAngle) ) ); //use law of cosines to solve for distance to goal
+        RobotBase.setTelemetry1("real distance", distance);
+        return Math.toDegrees( Math.asin ( (cameraDistance * Math.sin(curRadAngle) ) / distance ) );
+    }
+
+    private double angleToPosition(double angle)
+    {
+        angle = Math.abs(angle);
+        double position = angle / 1800.0 * turretMultiplier;
+        return position;
+    }
+
+    public double aimTurret()
+    {
+        update();
+        if(aprilTagUtility.isBlue) aimPosition = center - angleToPosition(aimAngle);
+        if(!aprilTagUtility.isBlue) aimPosition = center + angleToPosition(aimAngle);
+        if(checkPosition(aimPosition)) turret.setPosition(aimPosition);
+        return aimPosition;
+    }
+
+    public void turretCenter()
+    {
+        turret.setPosition(center);
+    }
+
+    private boolean checkPosition(double position)
+    {
+        if(position < right && position > left) return true;
+        else return false;
+    }
+
+
+}
