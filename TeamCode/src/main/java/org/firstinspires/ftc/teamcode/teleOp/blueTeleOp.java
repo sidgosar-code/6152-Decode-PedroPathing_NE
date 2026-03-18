@@ -39,7 +39,7 @@ public class blueTeleOp extends OpMode
         if(gamepad2.leftBumperWasPressed()) robot.shooter.stopShooter();
 
         if(gamepad2.aWasPressed()) robot.sorting.vindexerA();
-        if(!shootingPosition && gamepad2.bWasPressed()) robot.sorting.vindexerB();
+        if(!shootingPosition && gamepad2.bWasReleased()) robot.sorting.vindexerB();
         if(!shootingPosition && gamepad2.xWasPressed()) robot.sorting.vindexerC();
 
         if(gamepad2.left_trigger>0) robot.intake.startIntake();
@@ -50,5 +50,6 @@ public class blueTeleOp extends OpMode
         else robot.transfer.stopAll();
         if(shootingPosition && gamepad2.bWasPressed()) robot.shoot3();
         if(shootingPosition && gamepad2.bWasPressed()) robot.farZoneShoot3();
-        if(gamepad2.dpadUpWasPressed()) robot.stopALl();    }
+        if(gamepad2.dpadUpWasPressed()) robot.stopAll();
+    }
 }

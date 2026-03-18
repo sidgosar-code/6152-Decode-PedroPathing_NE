@@ -22,6 +22,9 @@ public class Movement
         //set directions
         frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
         backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        xV = 1;
+        yV = 1;
+        rV = 1;
     }
 
     public void teleOpDrive(double x, double y, double rotation)
@@ -31,8 +34,8 @@ public class Movement
         rotation*=rV;
         frontLeftMotor.setPower(y - x + rotation);
         backLeftMotor.setPower(y + x + rotation);
-        frontRightMotor.setPower(y + x -rotation);
-        backRightMotor.setPower(y - x - rotation);
+        frontRightMotor.setPower(y - x -rotation);
+        backRightMotor.setPower(y + x - rotation);
     }
 
     public void slowTeleOpDrive(double x, double y, double rotation)

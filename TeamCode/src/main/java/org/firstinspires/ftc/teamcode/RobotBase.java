@@ -97,6 +97,7 @@ public class RobotBase
     {
         shooter.setShooter();
         transfer.startStorage();
+        turret.hoodHigh();
         transfer.feedOne();
         waitTime(Shooter.toSpeed);
         transfer.feedOne();
@@ -107,11 +108,12 @@ public class RobotBase
     public void shoot3()
     {
         shooter.setShooter();
-        turret.aimTurret();
+        //turret.aimTurret();
         turret.hoodLow();
         waitTime(Shooter.shootPrep);
         transfer.fullTransfer();
         waitTime(Shooter.shoot2);
+        transfer.fullTransfer();
         intake.startIntake();
         transfer.flickOne();
     }
@@ -126,7 +128,7 @@ public class RobotBase
         return;
     }
 
-    public void stopALl()
+    public void stopAll()
     {
         shooter.stopShooter();
         transfer.stopAll();

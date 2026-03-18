@@ -98,13 +98,16 @@ public class Turret
     public Servo hood1;
 
     public AprilTagUtility aprilTagUtility;
-    public static double center = 0;
-    public static double right = 0.03;
-    public static double left = 0.47;
+    public static double center = 0.385;
+    public static double right = 0.18;
+    public static double left = 0.58;
 
     public static double cameraShooterOffset = 7; //inches
 
-    public double cameraAimAngle, aimAngle, aimPosition, distance;
+    public double cameraAimAngle, aimAngle, aimPosition, distance, curPosition;
+
+    public static double increment = 0.01;
+    public static double crIncrement = 0.0005;
     public static double turretMultiplier = 1;
     public static double hoodMin = 0.67;
     public static double hoodMax = 0.60;
@@ -114,6 +117,7 @@ public class Turret
         hood1 = hardwareMap.get(Servo.class, "hood1");
         this.aprilTagUtility = aprilTagUtility;
         aimPosition = center;
+        curPosition = center;
     }
 
     public void hoodHigh(){hood1.setPosition(hoodMax);}
@@ -125,6 +129,11 @@ public class Turret
         cameraAimAngle = aprilTagUtility.getAngleToGoal();
         aimAngle = cameraAngleToAim(cameraAimAngle);
         RobotBase.setTelemetry1("aimAngle", aimAngle);
+    }
+
+    public void updateCur()
+    {
+        curPosition = turret.getPosition();
     }
 
      /**
@@ -146,7 +155,7 @@ public class Turret
     private double angleToPosition(double angle)
     {
         angle = Math.abs(angle);
-        double position = angle / 1800.0 * turretMultiplier;
+        double position = angle / 1800.0 * turretMultiplier * (88.0/17.0);
         return position;
     }
 
@@ -159,15 +168,51 @@ public class Turret
         return aimPosition;
     }
 
-    public void turretCenter()
+    public void center()
     {
+        updateCur();
         turret.setPosition(center);
+        updateCur();
     }
 
     private boolean checkPosition(double position)
     {
-        if(position < right && position > left) return true;
+        if(position >= right && position <= left) return true;
         else return false;
+    }
+
+    public void incRight()
+    {
+        updateCur();
+        curPosition -= increment;
+        if(checkPosition(curPosition)) turret.setPosition(curPosition);
+        else turret.setPosition(right);
+        updateCur();
+    }
+    public  void incLeft()
+    {
+        updateCur();
+        curPosition += increment;
+        if(checkPosition(curPosition)) turret.setPosition(curPosition);
+        else turret.setPosition(left);
+        updateCur();
+    }
+
+    public void crIncRight()
+    {
+        updateCur();
+        curPosition -= crIncrement;
+        if(checkPosition(curPosition)) turret.setPosition(curPosition);
+        else turret.setPosition(right);
+        updateCur();
+    }
+    public void crIncLeft()
+    {
+        updateCur();
+        curPosition += crIncrement;
+        if(checkPosition(curPosition)) turret.setPosition(curPosition);
+        else turret.setPosition(left);
+        updateCur();
     }
 
 

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.systems;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -7,14 +8,15 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotBase;
 import org.firstinspires.ftc.teamcode.unused.ModeManager;
 
+@Configurable
 public class Sorting
 {
     public Servo vindexer;
     public Transfer transfer;
 
-       public static final double A = 0.052;
-    public static final double B = 0.118;
-    public static final double C = 0.187;
+    public static double A = 0.201;
+    public static double B = 0.27;
+    public static double C = 0.3445;
 
     public ElapsedTime timer;
     public static double vindexerWaitTime = 500;

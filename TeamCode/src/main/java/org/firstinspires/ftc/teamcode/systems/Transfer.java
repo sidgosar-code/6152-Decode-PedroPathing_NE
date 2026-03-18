@@ -23,7 +23,7 @@ public class Transfer
     public static double storageReg = 0.7;
     public static double feedMax  = 0.9;
     public  static double storageMax = 0.9;
-    public static double feedIntake = 0.1;
+    public static double feedIntake = 0.4;
 
     public static final double flickerRest = 0.625;
     public static final double flickerPush = flickerRest + 0.125;
