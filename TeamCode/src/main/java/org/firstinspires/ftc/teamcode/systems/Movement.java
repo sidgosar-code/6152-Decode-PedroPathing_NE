@@ -32,18 +32,18 @@ public class Movement
         x*=xV;
         y*=yV;
         rotation*=rV;
-        frontLeftMotor.setPower(y - x + rotation);
-        backLeftMotor.setPower(y + x + rotation);
-        frontRightMotor.setPower(y - x -rotation);
-        backRightMotor.setPower(y + x - rotation);
+        frontLeftMotor.setPower(y - x - rotation);
+        backLeftMotor.setPower(y + x - rotation);
+        frontRightMotor.setPower(y - x + rotation);
+        backRightMotor.setPower(y + x + rotation);
     }
 
     public void slowTeleOpDrive(double x, double y, double rotation)
     {
-        frontLeftMotor.setPower((y - x + rotation) * slowValue);
-        backLeftMotor.setPower((y + x + rotation) * slowValue);
-        frontRightMotor.setPower((y + x -rotation) * slowValue);
-        backRightMotor.setPower((y - x - rotation) * slowValue);
+        frontLeftMotor.setPower((y - x - rotation) * slowValue);
+        backLeftMotor.setPower((y + x - rotation) * slowValue);
+        frontRightMotor.setPower((y - x + rotation) * slowValue);
+        backRightMotor.setPower((y + x + rotation) * slowValue);
     }
 
 
