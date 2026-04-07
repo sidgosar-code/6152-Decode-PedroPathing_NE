@@ -33,10 +33,11 @@ public class Constants {
             .rightRearMotorName("backRightMotor")
             .leftRearMotorName("backLeftMotor")
             .leftFrontMotorName("frontLeftMotor")
-            .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE) //tried rrff,rfrf
-            .leftRearMotorDirection(DcMotorSimple.Direction.FORWARD) //genuinely cooked
-            .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD) //like idk what to do
-            .rightRearMotorDirection(DcMotorSimple.Direction.FORWARD); //will try more stuff 4/2
+            .leftFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .leftRearMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .rightRearMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .xVelocity(55.59);
     public static PinpointConstants localizerConstants = new PinpointConstants()
             .forwardPodY(-7.25)
             .strafePodX(-1.125)
