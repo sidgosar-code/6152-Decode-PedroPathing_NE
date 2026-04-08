@@ -21,6 +21,7 @@ public class Movement
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
         //set directions
+        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
         backRightMotor.setDirection(DcMotor.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -36,16 +37,16 @@ public class Movement
         rotation*=rV;
         frontLeftMotor.setPower(y - x - rotation);
         backLeftMotor.setPower(y + x - rotation);
-        frontRightMotor.setPower(y - x + rotation);
-        backRightMotor.setPower(y + x + rotation);
+        frontRightMotor.setPower(y + x + rotation);
+        backRightMotor.setPower(y - x + rotation);
     }
 
     public void slowTeleOpDrive(double x, double y, double rotation)
     {
         frontLeftMotor.setPower((y - x - rotation) * slowValue);
         backLeftMotor.setPower((y + x - rotation) * slowValue);
-        frontRightMotor.setPower((y - x + rotation) * slowValue);
-        backRightMotor.setPower((y + x + rotation) * slowValue);
+        frontRightMotor.setPower((y + x + rotation) * slowValue);
+        backRightMotor.setPower((y - x + rotation) * slowValue);
     }
 
 
