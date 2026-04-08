@@ -95,7 +95,7 @@ public class RobotBase
 
     public void farZoneShoot3()
     {
-        shooter.setShooter();
+        shooter.shooterMax();
         transfer.startStorage();
         turret.hoodHigh();
         transfer.feedOne();
@@ -107,7 +107,7 @@ public class RobotBase
     }
     public void shoot3()
     {
-        shooter.setShooter();
+        shooter.shooterMin();
         //turret.aimTurret();
         turret.hoodLow();
         waitTime(Shooter.shootPrep);

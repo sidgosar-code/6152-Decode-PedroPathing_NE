@@ -107,7 +107,7 @@ public class Turret
     public double cameraAimAngle, aimAngle, aimPosition, distance, curPosition;
 
     public static double increment = 0.01;
-    public static double crIncrement = 0.0005;
+    public static double crIncrement = 0.002;
     public static double turretMultiplier = 1;
     public static double hoodMin = 0.67;
     public static double hoodMax = 0.60;

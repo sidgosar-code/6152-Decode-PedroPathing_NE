@@ -8,19 +8,18 @@ import org.firstinspires.ftc.teamcode.RobotBase;
 @Configurable
 public class Shooter
 {
-    public DcMotorEx shooter;
-
+    public DcMotorEx shooterMotor;
     public static int minInd = 1;
 
     public static double shoot2 = 200; //time to shoot 2 balls before flicking, in ms
     public static double shootPrep = 300; // time to aim turret, fix hood, and shooter to get up to speed, in ms
     public static double toSpeed = 500; // time for shooter to reach desired velocity, in ms
 
-    public static double farVelocity = 1750;
+    public static double maxVelocity = 1750;
     public static double midVelocity = 1500;
     public static double minVelocity = 1400;
     public double curVelocity;
-    public static double[] speeds = {minVelocity, midVelocity, farVelocity};
+    public static double[] speeds = {minVelocity, midVelocity, maxVelocity};
     public int speedIndex = 1;
     public static final double F = 14.25;//for pidf
     public static final double P = 175;//for pidf
@@ -32,25 +31,35 @@ public class Shooter
 
     public Shooter(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
-        shooter = hardwareMap.get(DcMotorEx.class, "shooter");
+        shooterMotor = hardwareMap.get(DcMotorEx.class, "shooter");
         curVelocity = midVelocity;
 
 
-        RobotBase.useEncoders(shooter);
+        RobotBase.useEncoders(shooterMotor);
         shooterPIDF = new PIDFCoefficients(P, 0, 0, F);
-        shooter.setPIDFCoefficients(shooter.getMode(), shooterPIDF);
+        shooterMotor.setPIDFCoefficients(shooterMotor.getMode(), shooterPIDF);
+    }
+
+    public void shooterMax()
+    {
+        shooterMotor.setVelocity(maxVelocity);
+    }
+    public void shooterMin()
+    {
+        shooterMotor.setVelocity(minVelocity);
     }
     public void setShooter()
     {
-        shooter.setVelocity(curVelocity);
-        if(curVelocity==minVelocity) curVelocity = midVelocity;
-        else if(curVelocity == midVelocity) curVelocity = farVelocity;
-        else curVelocity = minVelocity;
+        shooterMotor.setVelocity(midVelocity);
+
+        //if(curVelocity==minVelocity) curVelocity = midVelocity;
+        //else if(curVelocity == midVelocity) curVelocity = farVelocity;
+        //else curVelocity = minVelocity;
         
     }
     public void stopShooter()
     {
-        shooter.setVelocity(0);
+        shooterMotor.setVelocity(0);
     }
     public double calculateVelocity(double x, double y)
     {

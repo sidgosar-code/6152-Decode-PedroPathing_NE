@@ -33,7 +33,7 @@ public class blueTeleOp extends OpMode
         if(gamepad2.rightBumperWasPressed())
         {
             robot.shooter.setShooter();
-            robot.setTelemetry("shooter velocity", robot.shooter.shooter.getVelocity());
+            robot.setTelemetry("shooter velocity", robot.shooter.shooterMotor.getVelocity());
         }
 
         if(gamepad2.leftBumperWasPressed()) robot.shooter.stopShooter();
