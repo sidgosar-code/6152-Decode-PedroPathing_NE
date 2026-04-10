@@ -84,7 +84,7 @@ public class redTeleOp extends OpMode
         //transfer
         if(gamepad2.yWasPressed()) robot.transfer.flickOne();
         if(gamepad2.dpad_left) robot.transfer.fullTransfer();
-        else robot.transfer.stopAll();
+        else if(gamepad2.left_trigger==0) robot.transfer.stopAll();
         //if(robot.transfer.spamMode && gamepad2.bWasPressed()) robot.shoot3();
         //if(robot.transfer.spamMode && gamepad2.xWasPressed()) robot.farZoneShoot3();
         if(gamepad2.dpadUpWasPressed()) robot.stopAll();
