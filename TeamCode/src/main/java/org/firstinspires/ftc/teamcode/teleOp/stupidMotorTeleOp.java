@@ -24,10 +24,12 @@ public class stupidMotorTeleOp extends OpMode
         rotation = gamepad1.right_stick_x;
 
 
-        if(gamepad1.aWasPressed()) {robot.movement.frontLeftMotor.setPower((.1));}
-        if(gamepad1.bWasPressed()) {robot.movement.backLeftMotor.setPower((.1));}
-        if(gamepad1.xWasPressed()) {robot.movement.backRightMotor.setPower((.1));}
-        if(gamepad1.yWasPressed()) {robot.movement.frontRightMotor.setPower((.1));}
-        if(gamepad2.dpadUpWasPressed()) robot.stopAll();
+        if(gamepad1.aWasPressed()) {robot.movement.frontLeftMotor.setPower((.2));}
+        if(gamepad1.bWasPressed()) {robot.movement.backLeftMotor.setPower((.2));}
+        if(gamepad1.xWasPressed()) {robot.movement.backRightMotor.setPower((.2));}
+        if(gamepad1.yWasPressed()) {robot.movement.frontRightMotor.setPower((.2));}
+        if(gamepad1.dpadUpWasPressed()) robot.stopAll();
+        if(gamepad1.leftBumperWasPressed()) {robot.transfer.storage.setPower(.2);}
+        if(gamepad1.rightBumperWasPressed()) {robot.transfer.feed.setPower(.2);}
     }
 }
