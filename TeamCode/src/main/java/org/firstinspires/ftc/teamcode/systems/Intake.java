@@ -63,9 +63,9 @@ public class Intake
     {
         intake.setVelocity(max);
     }
-    public void outTake()
-    {
+    public void outTake() {
         intake.setVelocity(out);
+        transfer.out();
     }
     public void stopIntake()
     {

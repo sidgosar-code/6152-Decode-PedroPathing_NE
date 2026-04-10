@@ -78,7 +78,10 @@ public class redTeleOp extends OpMode
         if(!robot.transfer.spamMode && gamepad2.xWasPressed()) robot.sorting.vindexerC();
 
         //intake
-        if(gamepad2.left_trigger>0) robot.intake.startIntake();
+        if(gamepad2.left_trigger>0) {
+            if(gamepad2.left_stick_y<-.5) {robot.intake.outTake();} //might want to change control
+            else robot.intake.startIntake();
+        }
         else robot.intake.stopIntake();
 
         //transfer
@@ -87,7 +90,7 @@ public class redTeleOp extends OpMode
         else if(gamepad2.left_trigger==0) robot.transfer.stopAll();
         //if(robot.transfer.spamMode && gamepad2.bWasPressed()) robot.shoot3();
         //if(robot.transfer.spamMode && gamepad2.xWasPressed()) robot.farZoneShoot3();
-        if(gamepad2.dpadUpWasPressed()) robot.stopAll();
+        if(gamepad2.dpadUpWasPressed()) robot.stopAll(); //gonna have to change this
 
         //hood
         if(gamepad2.dpadDownWasPressed()) robot.turret.hoodLow();
