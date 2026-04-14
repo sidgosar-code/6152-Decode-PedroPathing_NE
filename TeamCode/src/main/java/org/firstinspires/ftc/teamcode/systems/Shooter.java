@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.RobotBase;
 @Configurable
 public class Shooter
 {
-    public DcMotorEx shooterMotor;
+    public DcMotorEx s;//shooter motor
     public static int minInd = 1;
 
     public static double shoot2 = 200; //time to shoot 2 balls before flicking, in ms
@@ -17,7 +17,7 @@ public class Shooter
 
     public static double maxVelocity = 1750;
     public static double midVelocity = 1500;
-    public static double minVelocity = 1400;
+    public static double minVelocity = 1125;
     public double curVelocity;
     public static double[] speeds = {minVelocity, midVelocity, maxVelocity};
     public int speedIndex = 1;
@@ -31,26 +31,26 @@ public class Shooter
 
     public Shooter(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
-        shooterMotor = hardwareMap.get(DcMotorEx.class, "shooter");
+        s = hardwareMap.get(DcMotorEx.class, "shooter");
         curVelocity = midVelocity;
 
 
-        RobotBase.useEncoders(shooterMotor);
+        RobotBase.useEncoders(s);
         shooterPIDF = new PIDFCoefficients(P, 0, 0, F);
-        shooterMotor.setPIDFCoefficients(shooterMotor.getMode(), shooterPIDF);
+        s.setPIDFCoefficients(s.getMode(), shooterPIDF);
     }
 
     public void shooterMax()
     {
-        shooterMotor.setVelocity(maxVelocity);
+        s.setVelocity(maxVelocity);
     }
     public void shooterMin()
     {
-        shooterMotor.setVelocity(minVelocity);
+        s.setVelocity(minVelocity);
     }
     public void setShooter()
     {
-        shooterMotor.setVelocity(midVelocity);
+        s.setVelocity(midVelocity);
 
         //if(curVelocity==minVelocity) curVelocity = midVelocity;
         //else if(curVelocity == midVelocity) curVelocity = farVelocity;
@@ -59,7 +59,7 @@ public class Shooter
     }
     public void stopShooter()
     {
-        shooterMotor.setVelocity(0);
+        s.setVelocity(0);
     }
     public double calculateVelocity(double x, double y)
     {

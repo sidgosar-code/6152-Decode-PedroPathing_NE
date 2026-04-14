@@ -2,12 +2,11 @@ package org.firstinspires.ftc.teamcode.systems;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Configurable
 public class Movement
 {
-    public DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor;
+    public DcMotor br, bl, fr, fl;
 
     public static double xV, yV, rV; //for motor directions, can try in panels
 
@@ -16,15 +15,15 @@ public class Movement
     public Movement(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
         //initialize on hardwaremap
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
+        br = hardwareMap.get(DcMotor.class, "backRightMotor");
+        bl = hardwareMap.get(DcMotor.class, "backLeftMotor");
+        fr = hardwareMap.get(DcMotor.class, "frontRightMotor");
+        fl = hardwareMap.get(DcMotor.class, "frontLeftMotor");
         //set directions
-        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        fl.setDirection(DcMotor.Direction.REVERSE);
+        fr.setDirection(DcMotor.Direction.REVERSE);
+        br.setDirection(DcMotor.Direction.REVERSE);
+        fl.setDirection(DcMotor.Direction.REVERSE);
         xV = 1;
         yV = 1;
         rV = 1;
@@ -35,18 +34,18 @@ public class Movement
         x*=xV;
         y*=yV;
         rotation*=rV;
-        frontLeftMotor.setPower(y - x - rotation);
-        backLeftMotor.setPower(y + x - rotation);
-        frontRightMotor.setPower(y + x + rotation);
-        backRightMotor.setPower(y - x + rotation);
+        fl.setPower(y - x - rotation);
+        bl.setPower(y + x - rotation);
+        fr.setPower(y + x + rotation);
+        br.setPower(y - x + rotation);
     }
 
     public void slowTeleOpDrive(double x, double y, double rotation)
     {
-        frontLeftMotor.setPower((y - x - rotation) * slowValue);
-        backLeftMotor.setPower((y + x - rotation) * slowValue);
-        frontRightMotor.setPower((y + x + rotation) * slowValue);
-        backRightMotor.setPower((y - x + rotation) * slowValue);
+        fl.setPower((y - x - rotation) * slowValue);
+        bl.setPower((y + x - rotation) * slowValue);
+        fr.setPower((y + x + rotation) * slowValue);
+        br.setPower((y - x + rotation) * slowValue);
     }
 
 

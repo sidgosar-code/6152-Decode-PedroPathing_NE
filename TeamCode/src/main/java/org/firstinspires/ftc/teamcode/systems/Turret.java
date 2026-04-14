@@ -94,7 +94,7 @@ import org.firstinspires.ftc.teamcode.RobotBase;
 @Configurable
 public class Turret
 {
-    public Servo turret;
+    public Servo t; //turret servo
     public Servo hood1;
 
     public AprilTagUtility aprilTagUtility;
@@ -113,7 +113,7 @@ public class Turret
     public static double hoodMax = 0.60;
     public Turret(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, AprilTagUtility aprilTagUtility)
     {
-        turret = hardwareMap.get(Servo.class, "turret");
+        t = hardwareMap.get(Servo.class, "turret");
         hood1 = hardwareMap.get(Servo.class, "hood1");
         this.aprilTagUtility = aprilTagUtility;
         aimPosition = center;
@@ -133,7 +133,7 @@ public class Turret
 
     public void updateCur()
     {
-        curPosition = turret.getPosition();
+        curPosition = t.getPosition();
     }
 
      /**
@@ -164,14 +164,14 @@ public class Turret
         update();
         if(aprilTagUtility.isBlue) aimPosition = center - angleToPosition(aimAngle);
         if(!aprilTagUtility.isBlue) aimPosition = center + angleToPosition(aimAngle);
-        if(checkPosition(aimPosition)) turret.setPosition(aimPosition);
+        if(checkPosition(aimPosition)) t.setPosition(aimPosition);
         return aimPosition;
     }
 
     public void center()
     {
         updateCur();
-        turret.setPosition(center);
+        t.setPosition(center);
         updateCur();
     }
 
@@ -185,16 +185,16 @@ public class Turret
     {
         updateCur();
         curPosition -= increment;
-        if(checkPosition(curPosition)) turret.setPosition(curPosition);
-        else turret.setPosition(right);
+        if(checkPosition(curPosition)) t.setPosition(curPosition);
+        else t.setPosition(right);
         updateCur();
     }
     public  void incLeft()
     {
         updateCur();
         curPosition += increment;
-        if(checkPosition(curPosition)) turret.setPosition(curPosition);
-        else turret.setPosition(left);
+        if(checkPosition(curPosition)) t.setPosition(curPosition);
+        else t.setPosition(left);
         updateCur();
     }
 
@@ -202,16 +202,16 @@ public class Turret
     {
         updateCur();
         curPosition -= crIncrement;
-        if(checkPosition(curPosition)) turret.setPosition(curPosition);
-        else turret.setPosition(right);
+        if(checkPosition(curPosition)) t.setPosition(curPosition);
+        else t.setPosition(right);
         updateCur();
     }
     public void crIncLeft()
     {
         updateCur();
         curPosition += crIncrement;
-        if(checkPosition(curPosition)) turret.setPosition(curPosition);
-        else turret.setPosition(left);
+        if(checkPosition(curPosition)) t.setPosition(curPosition);
+        else t.setPosition(left);
         updateCur();
     }
 

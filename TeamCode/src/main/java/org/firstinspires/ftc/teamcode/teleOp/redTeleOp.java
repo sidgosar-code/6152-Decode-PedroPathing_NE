@@ -49,12 +49,12 @@ public class redTeleOp extends OpMode
         if(gamepad2.rightStickButtonWasPressed()) robot.transfer.switchMode();
 
         //shooter
-        if(gamepad2.right_trigger>0)
+        if(gamepad2.right_stick_y>0)
         {
             if(gamepad2.rightBumperWasPressed())
             {
-                robot.shooter.setShooter();
-                robot.setTelemetry("shooter velocity", robot.shooter.shooterMotor.getVelocity());
+                robot.shooter.shooterMax();
+                robot.setTelemetry("shooter velocity", robot.shooter.s.getVelocity());
             }
         }
         else if(gamepad2.right_stick_y<0)
@@ -62,13 +62,13 @@ public class redTeleOp extends OpMode
             if(gamepad2.rightBumperWasPressed())
             {
                 robot.shooter.shooterMin();
-                robot.setTelemetry("shooter velocity", robot.shooter.shooterMotor.getVelocity());
+                robot.setTelemetry("shooter velocity", robot.shooter.s.getVelocity());
             }
         }
         else if(gamepad2.rightBumperWasPressed())
         {
-            robot.shooter.shooterMax();
-            robot.setTelemetry("shooter velocity", robot.shooter.shooterMotor.getVelocity());
+            robot.shooter.setShooter();
+            robot.setTelemetry("shooter velocity", robot.shooter.s.getVelocity());
         }
         if(gamepad2.leftBumperWasPressed()) robot.shooter.stopShooter();
 
