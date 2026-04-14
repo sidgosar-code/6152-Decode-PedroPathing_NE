@@ -125,6 +125,4 @@ public class Transfer
         RobotBase.setTelemetry1("sortMode" + sortMode);
     }
 
-
-
 }
