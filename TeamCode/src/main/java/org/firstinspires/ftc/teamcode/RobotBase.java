@@ -5,14 +5,15 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.systems.Alliance;
 import org.firstinspires.ftc.teamcode.systems.AprilTagUtility;
+import org.firstinspires.ftc.teamcode.systems.CurrentAlliance;
 import org.firstinspires.ftc.teamcode.systems.Intake;
 import org.firstinspires.ftc.teamcode.systems.Movement;
 import org.firstinspires.ftc.teamcode.systems.Shooter;
 import org.firstinspires.ftc.teamcode.systems.Sorting;
 import org.firstinspires.ftc.teamcode.systems.Transfer;
 import org.firstinspires.ftc.teamcode.systems.Turret;
-//import org.firstinspires.ftc.teamcode.systems.Turret;
 
 public class RobotBase
 {
@@ -24,44 +25,31 @@ public class RobotBase
     public Telemetry telemetry;
     public static Telemetry telemetry1;
 
-    //public ModeManager modeManager;
-
     public AprilTagUtility aprilTagUtility;
     public Movement movement;
     public ElapsedTime timer;
 
     //constructor here
-    public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, boolean isBlue)
+    public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, Alliance alliance)
     {
-        initHardware(hardwareMap, telemetry, isBlue);
+        CurrentAlliance.alliance = alliance;
+        initHardware(hardwareMap, telemetry);
     }
     public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)//for tests
     {
+        CurrentAlliance.alliance = Alliance.UNSELECTED;
         initHardware(hardwareMap, telemetry);
     }
-    public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, boolean isBlue)
+    public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
     {
-        aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry, isBlue);
-        //modeManager = new ModeManager();
-        transfer = new Transfer(hardwareMap);
+        aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
+        transfer = new Transfer(hardwareMap, shooter);
         shooter = new Shooter(hardwareMap);
         turret = new Turret(hardwareMap, aprilTagUtility);
         sorting = new Sorting(hardwareMap, transfer);
         intake = new Intake(hardwareMap, transfer);
         movement = new Movement(hardwareMap);
         this.telemetry = telemetry;
-        telemetry1 = telemetry;
-        timer = new ElapsedTime();
-    }
-    public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)//for tests
-    {
-        transfer = new Transfer(hardwareMap);
-        shooter = new Shooter(hardwareMap);
-        //turret = new Turret(hardwareMap, aprilTagUtility);
-        sorting = new Sorting(hardwareMap, transfer);
-        intake = new Intake(hardwareMap, transfer);
-        this.telemetry = telemetry;
-        movement = new Movement(hardwareMap);
         telemetry1 = telemetry;
         timer = new ElapsedTime();
     }

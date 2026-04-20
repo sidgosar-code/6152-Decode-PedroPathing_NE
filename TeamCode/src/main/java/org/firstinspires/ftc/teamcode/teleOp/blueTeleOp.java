@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.teleOp;
 
+import static org.firstinspires.ftc.teamcode.systems.Alliance.BLUE;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -15,7 +17,7 @@ public class blueTeleOp extends OpMode
     @Override
     public void init()
     {
-        robot = new RobotBase(hardwareMap, telemetry, true);
+        robot = new RobotBase(hardwareMap, telemetry, BLUE);
     }
     public void loop()
     {

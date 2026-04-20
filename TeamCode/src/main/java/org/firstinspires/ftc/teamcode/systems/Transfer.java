@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.systems;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -16,6 +17,7 @@ public class Transfer
     //public CRServo storage;
     public DcMotor storage;
     public Servo flicker;
+    public Shooter shooter;
 
     public boolean sortMode, spamMode;
 
@@ -23,7 +25,7 @@ public class Transfer
     public static double storageReg = 0.7;
     public static double feedMax  = 0.9;
     public  static double storageMax = 0.9;
-    public static double feedIntake = 0.4;
+    public static double feedIntake = 0.1;
 
     public static final double flickerRest = 0.625;
     public static final double flickerPush = flickerRest + 0.125;
@@ -32,12 +34,15 @@ public class Transfer
     public ElapsedTime timer;
     Telemetry telemetry;
 
-    public Transfer(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
+    public Transfer(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Shooter shooter)
     {
         feed = hardwareMap.get(DcMotor.class, "feed");
         flicker = hardwareMap.get(Servo.class, "flicker");
         //storage = hardwareMap.get(CRServo.class, "storage");
         storage = hardwareMap.get(DcMotor.class, "storage");
+
+        this.shooter = shooter;
+
         storage.setDirection(DcMotor.Direction.REVERSE);
 
         RobotBase.useEncoders(feed);
@@ -66,6 +71,13 @@ public class Transfer
         startFeed();
         startStorage();
     }
+    public void fullTransfer(double sTarget)
+    {
+        if(shooter.aboveTarget()) fullTransfer();
+        else stopFeed();
+
+    }
+
     public void startIntakeMode()
     {
         storage.setPower(storageReg);
@@ -111,18 +123,15 @@ public class Transfer
 
     public void intake()
     {
-        if(sortMode)storage.setPower(-storageReg);
-        else if(spamMode)
-        {
-            startIntakeMode();
-        }
+        if(sortMode) storage.setPower(-storageReg);
+        else if(spamMode) startIntakeMode();
     }
 
     public void switchMode()
     {
         sortMode = !sortMode;
         spamMode = !spamMode;
-        RobotBase.setTelemetry1("sortMode" + sortMode);
+        RobotBase.setTelemetry1("sortMode: " + sortMode);
     }
 
 }

@@ -111,6 +111,7 @@ public class Turret
     public static double turretMultiplier = 1;
     public static double hoodMin = 0.67;
     public static double hoodMax = 0.60;
+    public CurrentAlliance currentAlliance;
     public Turret(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, AprilTagUtility aprilTagUtility)
     {
         t = hardwareMap.get(Servo.class, "turret");
@@ -162,8 +163,8 @@ public class Turret
     public double aimTurret()
     {
         update();
-        if(aprilTagUtility.isBlue) aimPosition = center - angleToPosition(aimAngle);
-        if(!aprilTagUtility.isBlue) aimPosition = center + angleToPosition(aimAngle);
+        if(CurrentAlliance.alliance == Alliance.RED) aimPosition = center - angleToPosition(aimAngle);
+        if(CurrentAlliance.alliance == Alliance.BLUE) aimPosition = center + angleToPosition(aimAngle);
         if(checkPosition(aimPosition)) t.setPosition(aimPosition);
         return aimPosition;
     }

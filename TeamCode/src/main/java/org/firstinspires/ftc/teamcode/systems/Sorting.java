@@ -14,9 +14,9 @@ public class Sorting
     public Servo vindexer;
     public Transfer transfer;
 
-    public static double A = 0.201;
-    public static double B = 0.27;
-    public static double C = 0.3445;
+    public static double A = 0.204;
+    public static double B = 0.271;
+    public static double C = 0.343;
 
     public ElapsedTime timer;
     public static double vindexerWaitTime = 500;

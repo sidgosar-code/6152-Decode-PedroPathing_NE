@@ -1,39 +1,38 @@
 package org.firstinspires.ftc.teamcode.teleOp;
 
-import static org.firstinspires.ftc.teamcode.systems.Alliance.RED;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.RobotBase;
 import org.firstinspires.ftc.teamcode.systems.Alliance;
+import org.firstinspires.ftc.teamcode.systems.Shooter;
 
-@TeleOp(name = "redTeleOp", group = "real OpModes")
-public class redTeleOp extends OpMode
+@TeleOp
+public class bangBangTry extends OpMode
 {
     public RobotBase robot;
     double x, y, rotation;
-    boolean shootingPosition;
+
+    boolean transfer;
     @Override
     public void init()
     {
-        robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);//very important to have correct color
+        robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
+        transfer = false;
     }
-
-    /** CONTROLS:DRIVER:
-    * drive: left stick = forward/back/strafe, right stick = rotation, hold left trigger for slow mode;
-    * CONTROLS:GUNNER:
-    * right bumper: start shooter, left bumper: stop shooter;
-    *  a, b, x : vindexer a, b, c, respectively;
-    * left trigger(hold): intake;
-    * y: flicker;
-     * dpad down: full transfer;
-    */
     public void loop()
     {
         x = gamepad1.left_stick_x;
         y = gamepad1.left_stick_y;
         rotation = gamepad1.right_stick_x;
+
+        //this next section is a test to see if the transfer thing will work
+        if(gamepad2.dpadUpWasPressed())
+        {
+            transfer = !transfer;
+        }
+
+        if(transfer) robot.transfer.fullTransfer(robot.shooter.curTarget);
 
 
         //turret
@@ -56,7 +55,7 @@ public class redTeleOp extends OpMode
         {
             if(gamepad2.rightBumperWasPressed())
             {
-                robot.shooter.shooterMax();
+                robot.shooter.bangSet(Shooter.maxVelocity);
                 robot.setTelemetry("shooter velocity", robot.shooter.s.getVelocity());
             }
         }
@@ -64,13 +63,13 @@ public class redTeleOp extends OpMode
         {
             if(gamepad2.rightBumperWasPressed())
             {
-                robot.shooter.shooterMin();
+                robot.shooter.bangSet(Shooter.minVelocity);
                 robot.setTelemetry("shooter velocity", robot.shooter.s.getVelocity());
             }
         }
         else if(gamepad2.rightBumperWasPressed())
         {
-            robot.shooter.setShooter();
+            robot.shooter.bangSet(Shooter.midVelocity);
             robot.setTelemetry("shooter velocity", robot.shooter.s.getVelocity());
         }
         if(gamepad2.leftBumperWasPressed()) robot.shooter.stopShooter();
@@ -99,8 +98,4 @@ public class redTeleOp extends OpMode
         if(gamepad2.dpadDownWasPressed()) robot.turret.hoodLow();
         if(gamepad2.dpadUpWasPressed()) robot.turret.hoodHigh();
     }
-
-    /*
-    what's left: macros, turn off sorting for spamMode
-     */
 }

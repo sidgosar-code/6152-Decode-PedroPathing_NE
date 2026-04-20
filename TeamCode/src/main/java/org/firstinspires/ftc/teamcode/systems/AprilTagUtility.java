@@ -18,8 +18,6 @@ import java.util.List;
 
 public class AprilTagUtility
 {
-    public boolean isBlue;
-
     public int goalID;
     public AprilTagDetection goalTag;
     public static int width = 640;
@@ -29,11 +27,11 @@ public class AprilTagUtility
     public List<AprilTagDetection> detectedTags = new ArrayList<>();
     public Telemetry telemetry;
 
-    public AprilTagUtility(HardwareMap hardwareMap, Telemetry telemetry, boolean isBlue)
+
+    public AprilTagUtility(HardwareMap hardwareMap, Telemetry telemetry)
     {
         init(hardwareMap, telemetry);
-        setColor(isBlue);
-
+        updateGoalID();
     }
 
 
@@ -122,11 +120,10 @@ public class AprilTagUtility
         return id;
     }
 
-    public void setColor(boolean isBlue)//always true if blue
+    public void updateGoalID()
     {
-        if(isBlue){ this.isBlue = true; setGoalID(20);}
-        else {
-            this.isBlue = false; setGoalID(24);}
+        if(CurrentAlliance.alliance == Alliance.BLUE) setGoalID(20);
+        else if(CurrentAlliance.alliance == Alliance.RED) setGoalID(24);
     }
     private void setGoalID(int id)
     {

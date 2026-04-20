@@ -10,19 +10,20 @@ public class Shooter
 {
     public DcMotorEx s;//shooter motor
     public static int minInd = 1;
+    public boolean isOn;
 
     public static double shoot2 = 200; //time to shoot 2 balls before flicking, in ms
     public static double shootPrep = 300; // time to aim turret, fix hood, and shooter to get up to speed, in ms
     public static double toSpeed = 500; // time for shooter to reach desired velocity, in ms
 
-    public static double maxVelocity = 1750;
-    public static double midVelocity = 1500;
-    public static double minVelocity = 1125;
-    public double curVelocity;
+    public static double error = 250;
+
+    public static double maxVelocity = 1750, midVelocity = 1500, minVelocity = 1125;
+    public double curTarget;
     public static double[] speeds = {minVelocity, midVelocity, maxVelocity};
     public int speedIndex = 1;
-    public static final double F = 14.25;//for pidf
-    public static final double P = 175;//for pidf
+    public static double F = 14.25;//for pidf
+    public static double P = 125;//for pidf
 
     public double x, y, heading;
 
@@ -32,7 +33,7 @@ public class Shooter
     public Shooter(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
         s = hardwareMap.get(DcMotorEx.class, "shooter");
-        curVelocity = midVelocity;
+        curTarget = midVelocity;
 
 
         RobotBase.useEncoders(s);
@@ -40,22 +41,41 @@ public class Shooter
         s.setPIDFCoefficients(s.getMode(), shooterPIDF);
     }
 
+    public void set()
+    {
+        s.setVelocity(curTarget);
+    }
+
+    public boolean aboveTarget()
+    {
+        return s.getVelocity()>=curTarget-error;
+    }
+
+
     public void shooterMax()
     {
-        s.setVelocity(maxVelocity);
+        curTarget = maxVelocity;
+        set();
     }
     public void shooterMin()
     {
-        s.setVelocity(minVelocity);
+        curTarget = minVelocity;
+        set();
     }
     public void setShooter()
     {
-        s.setVelocity(midVelocity);
+        curTarget = midVelocity;
+        set();
 
         //if(curVelocity==minVelocity) curVelocity = midVelocity;
         //else if(curVelocity == midVelocity) curVelocity = farVelocity;
         //else curVelocity = minVelocity;
         
+    }
+    public void bangSet(double target)
+    {
+        if(s.getVelocity()<curTarget) s.setPower(1);
+        else s.setPower(0);
     }
     public void stopShooter()
     {

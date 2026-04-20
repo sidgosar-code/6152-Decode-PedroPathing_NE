@@ -18,7 +18,7 @@ public class systemsTest extends OpMode
     public void loop()
     {
         robot.setTelemetry("shooter velocity", robot.shooter.s.getVelocity());
-        robot.setTelemetry("shooter velocity", robot.shooter.curVelocity);
+        robot.setTelemetry("shooter velocity", robot.shooter.curTarget);
         if(gamepad1.a)
         {
             /*
