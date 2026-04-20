@@ -18,7 +18,7 @@ public class Shooter
 
     public static double error = 250;
 
-    public static double maxVelocity = 1750, midVelocity = 1500, minVelocity = 1125;
+    public static double maxVelocity = 1700, midVelocity = 1375, minVelocity = 1125;
     public double curTarget;
     public static double[] speeds = {minVelocity, midVelocity, maxVelocity};
     public int speedIndex = 1;

@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.RobotBase;
+import org.firstinspires.ftc.teamcode.systems.Alliance;
 
 @TeleOp
 public class turretTest extends OpMode
@@ -13,7 +14,7 @@ public class turretTest extends OpMode
     @Override
     public void init()
     {
-        robot = new RobotBase(hardwareMap, telemetry, isBlue);
+        robot = new RobotBase(hardwareMap, telemetry, Alliance.UNSELECTED);
     }
     public void loop()
     {
