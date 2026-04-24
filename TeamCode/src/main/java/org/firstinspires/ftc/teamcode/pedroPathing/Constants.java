@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.pedroPathing;
 
 import com.pedropathing.control.PIDFCoefficients;
+import com.pedropathing.control.PredictiveBrakingCoefficients;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;
@@ -15,11 +16,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Constants {
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(13.47)
-            .headingPIDFCoefficients(new PIDFCoefficients(1.2, 0, 0.1, 0.033))
-            .translationalPIDFCoefficients(new PIDFCoefficients(.1, 0, 0.015, 0.035))
-            .forwardZeroPowerAcceleration(-35.24)
-            .lateralZeroPowerAcceleration(-70.06);
+            .mass(0)
+            .headingPIDFCoefficients(new PIDFCoefficients(1, 0, 0, 0.01))
+            .predictiveBrakingCoefficients(new PredictiveBrakingCoefficients(0.1, 0.1964337, -0.00239348)) // (kP, kLinear, kQuadratic)
+            .centripetalScaling(0);
+            //.translationalPIDFCoefficients(new PIDFCoefficients(.1, 0, 0.015, 0.035))
+            //.forwardZeroPowerAcceleration(-35.24)
+            //.lateralZeroPowerAcceleration(-70.06);
 
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
@@ -43,12 +46,12 @@ public class Constants {
             .xVelocity(58.5)
             .yVelocity(54.6);
     public static PinpointConstants localizerConstants = new PinpointConstants()
-            .forwardPodY(-7.25)
-            .strafePodX(-1.125)
+            .forwardPodY(7.58724)
+            .strafePodX(0.86243)
             .distanceUnit(DistanceUnit.INCH)
             .hardwareMapName("pinpoint")
             .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)
-            .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED)
-            .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+            .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD)
+            .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED);
 }
 

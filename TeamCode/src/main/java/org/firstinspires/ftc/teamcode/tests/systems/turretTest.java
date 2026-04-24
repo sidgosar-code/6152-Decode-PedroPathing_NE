@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.tests.systems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.RobotBase;
-import org.firstinspires.ftc.teamcode.systems.Alliance;
+import org.firstinspires.ftc.teamcode.systems.RobotBase;
+import org.firstinspires.ftc.teamcode.util.Alliance;
 
 @TeleOp
 public class turretTest extends OpMode

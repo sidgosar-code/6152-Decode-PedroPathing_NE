@@ -1,25 +1,27 @@
 package org.firstinspires.ftc.teamcode.auto.red;
 
-import com.pedropathing.ivy.Command;
-import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.RobotBase;
-import org.firstinspires.ftc.teamcode.systems.Alliance;
+import org.firstinspires.ftc.teamcode.systems.RobotBase;
+import org.firstinspires.ftc.teamcode.util.Alliance;
+import org.firstinspires.ftc.teamcode.systems.Shooter;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+
 import static com.pedropathing.ivy.Scheduler.schedule;
-import static com.pedropathing.ivy.commands.Commands.*;
-import static com.pedropathing.ivy.groups.Groups.*;
+
+import java.util.List;
 
 @Autonomous
 public class nearRed extends LinearOpMode
 {
+    public RobotBase robot;
     public void runOpMode()
     {
+        robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
+
         //Scheduler.reset();
-        RobotBase robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
-        boolean done = robot.timer.seconds() > 30;
+        //boolean done = robot.timer.seconds() > 30;
         /*
         Command startShooter = Command.build()
                 .setStart(() -> robot.timer.reset())
@@ -32,10 +34,17 @@ public class nearRed extends LinearOpMode
 
          */
 
+        while(!isStarted() && !isStopRequested())
+        {
+            robot.aprilTagUtility.getObeliskTag();
+        }
+
+
         while(opModeIsActive())
         {
             robot.shooter.setShooter();
             robot.transfer.fullTransfer();
+            robot.waitTime(Shooter.toSpeed);
             robot.sorting.vindexerABC();
             break;
         }

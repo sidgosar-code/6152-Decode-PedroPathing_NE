@@ -5,8 +5,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.RobotBase;
-import org.firstinspires.ftc.teamcode.unused.ModeManager;
 
 @Configurable
 public class Sorting

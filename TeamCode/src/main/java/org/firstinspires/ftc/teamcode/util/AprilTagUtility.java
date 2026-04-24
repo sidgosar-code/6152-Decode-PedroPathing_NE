@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.systems;
+package org.firstinspires.ftc.teamcode.util;
 
 
 import android.util.Size;
@@ -27,14 +27,14 @@ public class AprilTagUtility
     public List<AprilTagDetection> detectedTags = new ArrayList<>();
     public Telemetry telemetry;
 
+    public CurrentMotif currentMotif;
+
 
     public AprilTagUtility(HardwareMap hardwareMap, Telemetry telemetry)
     {
         init(hardwareMap, telemetry);
         updateGoalID();
     }
-
-
 
     public void init(HardwareMap hardwareMap, Telemetry telemetry)
     {
@@ -54,12 +54,20 @@ public class AprilTagUtility
         builder.addProcessor(aprilTagProcessor);
 
         visionPortal = builder.build();
+
+        currentMotif = new CurrentMotif(getObeliskTag());
     }
 
     public void update()
     {
         detectedTags = aprilTagProcessor.getDetections();
         goalTag = getTagByID(goalID);
+
+        telemetry.addData("camera status", visionPortal.getCameraState());
+        telemetry.addData("motif", CurrentMotif.motif);
+        telemetry.update();
+
+
     }
     public void displayDetectionTelemetry(AprilTagDetection detectedId)
     {

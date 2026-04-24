@@ -1,19 +1,16 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.systems;
 
+import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.systems.Alliance;
-import org.firstinspires.ftc.teamcode.systems.AprilTagUtility;
-import org.firstinspires.ftc.teamcode.systems.CurrentAlliance;
-import org.firstinspires.ftc.teamcode.systems.Intake;
-import org.firstinspires.ftc.teamcode.systems.Movement;
-import org.firstinspires.ftc.teamcode.systems.Shooter;
-import org.firstinspires.ftc.teamcode.systems.Sorting;
-import org.firstinspires.ftc.teamcode.systems.Transfer;
-import org.firstinspires.ftc.teamcode.systems.Turret;
+import org.firstinspires.ftc.teamcode.util.Alliance;
+import org.firstinspires.ftc.teamcode.util.AprilTagUtility;
+import org.firstinspires.ftc.teamcode.util.CurrentAlliance;
+
+import static com.pedropathing.ivy.Scheduler.schedule;
 
 public class RobotBase
 {
@@ -35,11 +32,14 @@ public class RobotBase
         CurrentAlliance.alliance = alliance;
         initHardware(hardwareMap, telemetry);
     }
+
     public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)//for tests
     {
         CurrentAlliance.alliance = Alliance.UNSELECTED;
         initHardware(hardwareMap, telemetry);
     }
+
+
     public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
     {
         aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
@@ -123,4 +123,9 @@ public class RobotBase
         intake.stopIntake();
     }
 
+    public static class CommandLib
+    {
+        public static Command start;
+        public static Command sort;
+    }
 }

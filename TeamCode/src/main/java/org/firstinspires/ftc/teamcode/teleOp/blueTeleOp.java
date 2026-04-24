@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.teleOp;
 
-import static org.firstinspires.ftc.teamcode.systems.Alliance.BLUE;
+import static org.firstinspires.ftc.teamcode.util.Alliance.BLUE;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.RobotBase;
+import org.firstinspires.ftc.teamcode.systems.RobotBase;
 
 @TeleOp(name = "blueTeleOp", group = "real OpModes")
 public class blueTeleOp extends OpMode

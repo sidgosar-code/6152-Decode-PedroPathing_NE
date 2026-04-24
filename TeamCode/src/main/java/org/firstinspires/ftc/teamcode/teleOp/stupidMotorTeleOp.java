@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.teleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.RobotBase;
-import org.firstinspires.ftc.teamcode.systems.Alliance;
+import org.firstinspires.ftc.teamcode.systems.RobotBase;
+import org.firstinspires.ftc.teamcode.util.Alliance;
 
 @TeleOp(name = "stupidMotorTeleOp", group = "real OpModes")
 public class stupidMotorTeleOp extends OpMode

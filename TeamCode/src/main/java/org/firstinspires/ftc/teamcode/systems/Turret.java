@@ -89,7 +89,9 @@ public class Turret
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.RobotBase;
+import org.firstinspires.ftc.teamcode.util.Alliance;
+import org.firstinspires.ftc.teamcode.util.AprilTagUtility;
+import org.firstinspires.ftc.teamcode.util.CurrentAlliance;
 
 @Configurable
 public class Turret
