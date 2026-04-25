@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.auto.lib.CommandBuilder;
+import org.firstinspires.ftc.teamcode.auto.lib.PathBuilder;
 import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.AprilTagUtility;
 import org.firstinspires.ftc.teamcode.util.CurrentAlliance;
@@ -26,6 +28,9 @@ public class RobotBase
     public Movement movement;
     public ElapsedTime timer;
 
+    public CommandBuilder commandBuilder;
+    public PathBuilder pathBuilder;
+
     //constructor here
     public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, Alliance alliance)
     {
@@ -42,7 +47,6 @@ public class RobotBase
 
     public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
     {
-        aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
         transfer = new Transfer(hardwareMap, shooter);
         shooter = new Shooter(hardwareMap);
         turret = new Turret(hardwareMap, aprilTagUtility);
@@ -52,6 +56,12 @@ public class RobotBase
         this.telemetry = telemetry;
         telemetry1 = telemetry;
         timer = new ElapsedTime();
+    }
+    public void initAuto(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
+    {
+        aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
+        pathBuilder = new PathBuilder(hardwareMap);
+        commandBuilder = new CommandBuilder(pathBuilder);
     }
 
     public void setTelemetry(String caption, double data)
@@ -125,7 +135,10 @@ public class RobotBase
 
     public static class CommandLib
     {
-        public static Command start;
-        public static Command sort;
+        public static Command setShooter; //=
+                //Command.build()
+
+        public static Command sort; //=
+        //Command.build()
     }
 }

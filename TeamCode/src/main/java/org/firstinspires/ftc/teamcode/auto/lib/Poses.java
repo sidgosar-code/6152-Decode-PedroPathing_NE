@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.lib;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.geometry.Pose;
@@ -8,11 +8,12 @@ import com.pedropathing.geometry.Pose;
 public class Poses
 {
     public static Pose rcStart = new Pose(123, 123, rad(45));
-    public static Pose rcShoot = new Pose (83, 83, rad(45));
+    public static Pose rcShoot = new Pose (83, 83, rad(0));
 
     public static Pose rcCollect = new Pose(103, 83, rad(0));
 
     public static Pose rcCollectFinish = new Pose(112, 83, rad(0));
+    public static Pose rcEnd = new Pose(85, 115, rad(90));
 
     private static double rad(double deg)
     {
