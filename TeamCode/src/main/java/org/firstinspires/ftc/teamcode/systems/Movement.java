@@ -8,6 +8,8 @@ public class Movement
 {
     public DcMotor br, bl, fr, fl;
 
+    public static double DRIVE_VALUE = 0.5;
+
     public static double xV, yV, rV; //for motor directions, can try in panels
 
     public static double slowValue = 0.3;
@@ -47,6 +49,63 @@ public class Movement
         fr.setPower((y + x + rotation) * slowValue);
         br.setPower((y - x + rotation) * slowValue);
     }
+
+    public void strafe(double distanceInches, double power)
+    {
+        RobotBase.useEncoders(fl);
+        RobotBase.useEncoders(bl);
+        RobotBase.useEncoders(fr);
+        RobotBase.useEncoders(br);
+
+        int ticks = distanceToTicks(distanceInches);
+
+        br.setTargetPosition(-ticks);//just for now, so we can strafe
+        bl.setTargetPosition(-ticks);
+        fr.setTargetPosition(ticks);
+        fl.setTargetPosition(ticks);
+
+        //driveTrainEncoderSetup(DcMotor.RunMode.RUN_TO_POSITION);
+        //power=Values.DRIVE_VALUE;
+        drive(power);
+    }
+
+    public void drive(double power)
+    {
+
+        RobotBase.rtpMode(fl);
+        RobotBase.rtpMode(bl);
+        RobotBase.rtpMode(fr);
+        RobotBase.rtpMode(br);
+
+        fl.setPower(power);
+        bl.setPower(power);
+        fr.setPower(power);
+        br.setPower(power);
+
+        while(fl.isBusy() || bl.isBusy() || fr.isBusy() || br.isBusy())
+        {
+            int m = 4;
+        }
+        stopAll();
+    }
+    public void stopAll()
+    {
+        fl.setPower(0);
+        bl.setPower(0);
+        fr.setPower(0);
+        br.setPower(0);
+    }
+
+    public int distanceToTicks(double distanceInches)
+    {
+        double wheelDiameter = 4 * 0.0393701;       // in inches
+        double ticksPerRev = 28;         // motor-specific
+        double gearRatio = 1.0;           // motor:wheel
+        double wheelCircumference = Math.PI * wheelDiameter;
+        double rotations = distanceInches / wheelCircumference;
+        return (int)(rotations * ticksPerRev * gearRatio * DRIVE_VALUE);
+    }
+
 
 
 

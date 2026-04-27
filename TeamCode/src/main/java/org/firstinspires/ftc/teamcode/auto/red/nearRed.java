@@ -16,6 +16,9 @@ import java.util.List;
 public class nearRed extends LinearOpMode
 {
     public RobotBase robot;
+    public static double wait = 4000;
+    public static double strafe = 20;
+    @Override
     public void runOpMode()
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
@@ -46,6 +49,8 @@ public class nearRed extends LinearOpMode
             robot.transfer.fullTransfer();
             robot.waitTime(Shooter.toSpeed);
             robot.sorting.vindexerABC();
+            robot.waitTime(wait);
+            robot.movement.strafe(strafe, 0.5);
             break;
         }
     }

@@ -91,6 +91,9 @@ public class RobotBase
     public static void noEncoders(DcMotorEx motor) {motor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);motor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);}
     public static void noEncoders(DcMotor motor) {motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);}
 
+    public static void rtpMode(DcMotorEx motor) {motor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);motor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);}
+    public static void rtpMode(DcMotor motor) {motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);}
+
     public void farZoneShoot3()
     {
         shooter.shooterMax();
@@ -132,6 +135,8 @@ public class RobotBase
         transfer.stopAll();
         intake.stopIntake();
     }
+
+
 
     public static class CommandLib
     {
