@@ -4,6 +4,7 @@ import com.pedropathing.ivy.Command;
 
 import static com.pedropathing.ivy.groups.Groups.*;
 
+import org.firstinspires.ftc.teamcode.systems.CommandLib;
 import org.firstinspires.ftc.teamcode.systems.RobotBase;
 
 public class Commands
@@ -11,13 +12,13 @@ public class Commands
     public static Command autoRoutine()
     {
         return sequential(
-                RobotBase.CommandLib.setShooter,
+                CommandLib.setShooter,
                 CommandBuilder.moveBack,
-                RobotBase.CommandLib.sort,
+                CommandLib.sort,
                 CommandBuilder.shootToCollect,
                 CommandBuilder.collect,
                 CommandBuilder.collectToShoot,
-                RobotBase.CommandLib.sort
+                CommandLib.sort
         );
     }
 }

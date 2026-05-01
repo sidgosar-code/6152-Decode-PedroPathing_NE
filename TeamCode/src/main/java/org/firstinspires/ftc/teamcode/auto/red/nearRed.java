@@ -22,6 +22,7 @@ public class nearRed extends LinearOpMode
     public void runOpMode()
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
+        robot.initAuto();
 
         //Scheduler.reset();
         //boolean done = robot.timer.seconds() > 30;

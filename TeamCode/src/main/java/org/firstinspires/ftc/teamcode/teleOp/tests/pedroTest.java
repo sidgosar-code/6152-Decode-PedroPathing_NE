@@ -12,6 +12,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.systems.RobotBase;
+import org.firstinspires.ftc.teamcode.util.Alliance;
 
 import java.util.function.Supplier;
 
@@ -27,12 +29,16 @@ public class pedroTest extends OpMode
     private boolean slowMode = false;
     private double slowModeMultiplier = 0.5;
 
+    public RobotBase robot;
+
     @Override
     public void init() {
         follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(startingPose == null ? new Pose() : startingPose);
         follower.update();
         telemetryM = PanelsTelemetry.INSTANCE.getTelemetry();
+
+        robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
 
 //        pathChain = () -> follower.pathBuilder() //Lazy Curve Generation
 //                .addPath(new Path(new BezierLine(follower::getPose, new Pose(45, 98))))
@@ -74,6 +80,8 @@ public class pedroTest extends OpMode
                     true // Robot Centric
             );
         }
+
+        if(gamepad1.aWasPressed()) robot.turret.aim(follower.getPose());
 
         //Automated PathFollowing
 //        if (gamepad1.aWasPressed()) {

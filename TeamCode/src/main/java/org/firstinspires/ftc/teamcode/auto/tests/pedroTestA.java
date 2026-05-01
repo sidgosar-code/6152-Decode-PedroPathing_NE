@@ -17,19 +17,18 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Autonomous
 @Configurable
-public class pedroTest extends OpMode
+public class pedroTestA extends OpMode
 {
     private Follower follower;
-    public static Pose start = new Pose(30, 30, 90), end = new Pose(30, 35, 90);
+    public static Pose start = new Pose(30, 30, Math.toRadians(90)), end = new Pose(30, 35, Math.toRadians(90));
 
-    public static Path path = new Path(new BezierLine(start, end));
 
     public static PathChain pathChain;
 
     public void buildPaths()
     {
         pathChain = follower.pathBuilder()
-                .addPath(path)
+                .addPath(new BezierLine(start, end))
                 .setLinearHeadingInterpolation(start.getHeading(), end.getHeading())
                 .build();
     }
@@ -65,6 +64,12 @@ public class pedroTest extends OpMode
         telemetry.addData("y", follower.getPose().getY());
         telemetry.addData("heading", follower.getPose().getHeading());
         telemetry.update();
+    }
+
+    @Override
+    public void stop()
+    {
+        org.firstinspires.ftc.teamcode.teleOp.tests.pedroTest.startingPose = follower.getPose();
     }
 
 

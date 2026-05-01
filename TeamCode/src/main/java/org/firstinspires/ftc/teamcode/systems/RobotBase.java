@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.systems;
 
-import com.pedropathing.ivy.Command;
+import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.auto.lib.CommandBuilder;
 import org.firstinspires.ftc.teamcode.auto.lib.PathBuilder;
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.AprilTagUtility;
 import org.firstinspires.ftc.teamcode.util.CurrentAlliance;
@@ -31,37 +32,48 @@ public class RobotBase
     public CommandBuilder commandBuilder;
     public PathBuilder pathBuilder;
 
+    public Follower follower;
+
+    public com.qualcomm.robotcore.hardware.HardwareMap hardwareMap;
+
+
     //constructor here
     public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, Alliance alliance)
     {
+        this.hardwareMap = hardwareMap;
+        this.telemetry = telemetry;
         CurrentAlliance.alliance = alliance;
-        initHardware(hardwareMap, telemetry);
+        initHardware();
     }
 
     public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)//for tests
     {
+        this.hardwareMap = hardwareMap;
+        this.telemetry = telemetry;
         CurrentAlliance.alliance = Alliance.UNSELECTED;
-        initHardware(hardwareMap, telemetry);
+        initHardware();
     }
 
 
-    public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
+    public void initHardware()
     {
         transfer = new Transfer(hardwareMap, shooter);
         shooter = new Shooter(hardwareMap);
         turret = new Turret(hardwareMap, aprilTagUtility);
-        sorting = new Sorting(hardwareMap, transfer);
+        sorting = new Sorting(hardwareMap, transfer, aprilTagUtility);
         intake = new Intake(hardwareMap, transfer);
         movement = new Movement(hardwareMap);
-        this.telemetry = telemetry;
+        //this.telemetry = telemetry;
         telemetry1 = telemetry;
         timer = new ElapsedTime();
     }
-    public void initAuto(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)
+    public void initAuto()
     {
         aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
         pathBuilder = new PathBuilder(hardwareMap);
         commandBuilder = new CommandBuilder(pathBuilder);
+        follower = Constants.createFollower(hardwareMap);
+        CommandLib.create(this);
     }
 
     public void setTelemetry(String caption, double data)
@@ -134,16 +146,5 @@ public class RobotBase
         shooter.stopShooter();
         transfer.stopAll();
         intake.stopIntake();
-    }
-
-
-
-    public static class CommandLib
-    {
-        public static Command setShooter; //=
-                //Command.build()
-
-        public static Command sort; //=
-        //Command.build()
     }
 }

@@ -13,7 +13,7 @@ public class systemsTest extends OpMode
     public void init()
     {
         robot = new RobotBase(hardwareMap, telemetry);
-        robot.initHardware(hardwareMap, telemetry);
+        robot.initHardware();
     }
     public void loop()
     {

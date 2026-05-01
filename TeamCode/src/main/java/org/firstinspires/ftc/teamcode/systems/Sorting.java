@@ -5,6 +5,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.util.AprilTagUtility;
+import org.firstinspires.ftc.teamcode.util.CurrentMotif;
+import org.firstinspires.ftc.teamcode.util.Motif;
 
 @Configurable
 public class Sorting
@@ -21,11 +24,21 @@ public class Sorting
     public static double flickOneWaitTime = 500;
 
     public Telemetry telemetry;
-    public Sorting(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Transfer transfer)
+    public AprilTagUtility aprilTagUtility;
+
+    public Motif motif;
+    public Sorting(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Transfer transfer, AprilTagUtility aprilTagUtility)
     {
         vindexer = hardwareMap.get(Servo.class, "vindexer");
         this.transfer = transfer;
         timer = new ElapsedTime();
+        this.aprilTagUtility = aprilTagUtility;
+        updateMotif();
+    }
+
+    public void updateMotif()
+    {
+        motif = CurrentMotif.motif;
     }
     public void vindexerA()
     {
@@ -63,9 +76,9 @@ public class Sorting
         vindexer.setPosition(A); transfer.flickOne(); }
 
      */
-    public void vindexerCAB()
+    public void vindexerACB()
     {
-        vindexerPositions(C, A, B);
+        vindexerPositions(A, C, B);
     }
 
     /*
@@ -81,6 +94,13 @@ public class Sorting
         vindexer.setPosition(pos1); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
         vindexer.setPosition(pos2); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
         vindexer.setPosition(pos3); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
+    }
+
+    public void sort()
+    {
+        if(motif == Motif.PGP) vindexerABC();//b always contains green ball
+        else if(motif == Motif.GPP) vindexerBAC();
+        else if(motif == Motif.PPG) vindexerACB();
     }
 
     public void waitTime(double time)
