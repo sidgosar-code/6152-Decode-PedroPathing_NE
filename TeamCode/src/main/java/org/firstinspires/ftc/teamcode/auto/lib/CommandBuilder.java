@@ -8,17 +8,18 @@ import static com.pedropathing.ivy.pedro.PedroCommands.*;
 public class CommandBuilder
 {
     public Follower follower;
-    public static Command moveBack, shootToCollect, collect, collectToShoot, end;
+    public static Command moveToShoot, shootToCollect, collect, collectToShoot, end;
 
     public CommandBuilder(PathBuilder pathBuilder)
     {
         this.follower = pathBuilder.follower;
         pathBuilder.buildPathsRC();
+        buildCommandsRed();
     }
 
     public void buildCommandsRed()
     {
-        moveBack = follow(follower, PathBuilder.moveToShoot);
+        moveToShoot = follow(follower, PathBuilder.moveToShoot);
         shootToCollect = follow(follower, PathBuilder.shootToCollect);
         collect = follow(follower, PathBuilder.collect, 0.3);
         collectToShoot = follow(follower, PathBuilder.collectToShoot);

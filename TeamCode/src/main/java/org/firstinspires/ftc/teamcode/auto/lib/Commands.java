@@ -12,7 +12,7 @@ public class Commands
     public static Command RCSort3()
     {
         return sequential(
-                CommandLib.setShooter.with(CommandBuilder.moveBack),
+                CommandLib.setShooter.with(CommandBuilder.moveToShoot),
                 CommandLib.sort,
                 CommandBuilder.shootToCollect.with(CommandLib.stopShooter),
                 parallel(
