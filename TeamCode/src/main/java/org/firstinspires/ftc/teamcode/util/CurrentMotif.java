@@ -7,7 +7,7 @@ public class CurrentMotif
     {
         update(tagID);
     }
-    public void update(int tagID)
+    public static void update(int tagID)
     {
         if(tagID == 21) motif = Motif.GPP;
         else if(tagID == 22) motif = Motif.PGP;

@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.systems;
 
+import static com.pedropathing.ivy.commands.Commands.instant;
+
 import com.bylazar.configurables.annotations.Configurable;
+import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
@@ -44,6 +47,7 @@ public class Shooter
     {
         s.setVelocity(curTarget);
     }
+
 
     public boolean aboveTarget()
     {

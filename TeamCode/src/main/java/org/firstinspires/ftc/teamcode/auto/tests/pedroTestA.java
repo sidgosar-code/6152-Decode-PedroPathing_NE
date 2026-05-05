@@ -29,7 +29,7 @@ public class pedroTestA extends OpMode
     {
         pathChain = follower.pathBuilder()
                 .addPath(new BezierLine(start, end))
-                .setLinearHeadingInterpolation(start.getHeading(), end.getHeading())
+                .setLinearHeadingInterpolation(start.getHeading(), end.getHeading(), 1.5)
                 .build();
     }
 

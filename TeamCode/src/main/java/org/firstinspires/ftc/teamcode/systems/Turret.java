@@ -235,18 +235,18 @@ public class Turret
     {
         double curX = curPose.getX();
         double curY = curPose.getY();
-        double curOffset = curPose.getHeading() + Math.toRadians(90);
+        double curOffset = Math.toRadians(90) - curPose.getHeading();
         double setAngle = Math.toRadians(90);
 
 
 
         if(CurrentAlliance.alliance == Alliance.RED)
         {
-            setAngle = Math.atan2(ConstantsHolder.redGoal.getY()- curY, ConstantsHolder.redGoal.getX()-curX) + curOffset;
+            setAngle = Math.toRadians(90)-Math.abs(Math.atan2(ConstantsHolder.redGoal.getY()- curY, ConstantsHolder.redGoal.getX()-curX)) + curOffset;
         }
         if(CurrentAlliance.alliance == Alliance.BLUE)
         {
-            setAngle = Math.atan2(ConstantsHolder.blueGoal.getY()- curY, ConstantsHolder.blueGoal.getX()-curX) + curOffset;
+            setAngle = Math.toRadians(180)- Math.abs(Math.atan2(ConstantsHolder.blueGoal.getY()- curY, ConstantsHolder.blueGoal.getX()-curX)) - curOffset;
         }
 
         setAngle = Math.toDegrees(setAngle);

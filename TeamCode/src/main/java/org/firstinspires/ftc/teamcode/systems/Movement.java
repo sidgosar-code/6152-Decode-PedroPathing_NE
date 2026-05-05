@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.systems;
 
 import com.bylazar.configurables.annotations.Configurable;
+import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Configurable
@@ -8,7 +9,7 @@ public class Movement
 {
     public DcMotor br, bl, fr, fl;
 
-
+    public Follower follower;
 
     public static double DRIVE_VALUE = 0.5;
 

@@ -81,6 +81,7 @@ public class Transfer
         feed.setPower(feedIntake);
     }
 
+
     public void feedOne()
     {
         timer.reset();

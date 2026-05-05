@@ -1,21 +1,16 @@
-package org.firstinspires.ftc.teamcode.auto.red;
+package org.firstinspires.ftc.teamcode.auto.tests;
 
-
-import static com.pedropathing.ivy.Scheduler.schedule;
-
-import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.auto.lib.Commands;
-import org.firstinspires.ftc.teamcode.auto.lib.RedPoses;
 import org.firstinspires.ftc.teamcode.systems.RobotBase;
 import org.firstinspires.ftc.teamcode.util.Alliance;
+import org.firstinspires.ftc.teamcode.util.CurrentAlliance;
 import org.firstinspires.ftc.teamcode.util.CurrentMotif;
 
 @Autonomous
-public class nearRed extends OpMode
+public class systemTest extends OpMode
 {
     public RobotBase robot;
     @Override
@@ -23,30 +18,21 @@ public class nearRed extends OpMode
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
         robot.initAuto();
-        Scheduler.reset();
-        robot.follower.setStartingPose(RedPoses.rcStart);
 
     }
     @Override
     public void init_loop()
     {
         CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
+        robot.setTelemetry("motif", CurrentMotif.motif);
     }
     @Override
     public void start()
     {
-        schedule(Commands.autoRoutine(Commands.nearRedSort3()));
-    }
-    @Override
-    public void loop()
-    {
-        robot.update();
-        Scheduler.execute();
 
     }
-    @Override
-    public void stop()
+    public void loop()
     {
-        robot.setTelemetry("auto complete");
+
     }
 }

@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class Constants {
     public static FollowerConstants followerConstants = new FollowerConstants()
             .mass(0)
-            .headingPIDFCoefficients(new PIDFCoefficients(1, 0, 0, 0.01))
+            .headingPIDFCoefficients(new PIDFCoefficients(1, 0.7, 0, 0.01))
             .predictiveBrakingCoefficients(new PredictiveBrakingCoefficients(0.1, 0.1964337, -0.00239348)) // (kP, kLinear, kQuadratic)
             .centripetalScaling(0);
             //.translationalPIDFCoefficients(new PIDFCoefficients(.1, 0, 0.015, 0.035))

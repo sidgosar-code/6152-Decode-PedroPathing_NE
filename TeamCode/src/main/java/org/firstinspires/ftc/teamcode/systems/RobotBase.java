@@ -8,10 +8,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.auto.lib.CommandBuilder;
 import org.firstinspires.ftc.teamcode.auto.lib.PathBuilder;
-import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.AprilTagUtility;
 import org.firstinspires.ftc.teamcode.util.CurrentAlliance;
+import org.firstinspires.ftc.teamcode.util.Motif;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 
@@ -70,15 +70,19 @@ public class RobotBase
     public void initAuto()
     {
         aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
+        CommandLib.create(this);
         pathBuilder = new PathBuilder(hardwareMap);
         commandBuilder = new CommandBuilder(pathBuilder);
-        follower = Constants.createFollower(hardwareMap);
-        CommandLib.create(this);
     }
 
     public void setTelemetry(String caption, double data)
     {
         telemetry.addData(caption, data);
+        telemetry.update();
+    }
+    public void setTelemetry(String caption, Motif motif)
+    {
+        telemetry.addData(caption, motif);
         telemetry.update();
     }
     public void setTelemetry(String line)
@@ -146,5 +150,14 @@ public class RobotBase
         shooter.stopShooter();
         transfer.stopAll();
         intake.stopIntake();
+    }
+
+    public void update()
+    {
+        follower.update();
+        telemetry.addData("x", follower.getPose().getX());
+        telemetry.addData("y", follower.getPose().getY());
+        telemetry.addData("heading", follower.getPose().getHeading());
+        telemetry.update();
     }
 }

@@ -6,7 +6,7 @@ import com.pedropathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 
-public class PathBuilder extends Paths
+public class PathBuilder extends RedPaths
 {
     public Follower follower;
 
@@ -39,6 +39,11 @@ public class PathBuilder extends Paths
         end = follower.pathBuilder()
                 .addPath(RCEnd)
                 .build();
+    }
+
+    public void buildPathsBlue()
+    {
+
     }
 
 
