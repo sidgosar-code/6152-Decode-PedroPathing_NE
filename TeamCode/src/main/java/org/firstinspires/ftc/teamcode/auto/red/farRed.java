@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto.red;
 
-
 import static com.pedropathing.ivy.Scheduler.schedule;
 
 import com.pedropathing.ivy.Scheduler;
@@ -14,7 +13,7 @@ import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.CurrentMotif;
 
 @Autonomous
-public class nearRed extends OpMode
+public class farRed extends OpMode
 {
     public RobotBase robot;
     @Override
@@ -23,7 +22,7 @@ public class nearRed extends OpMode
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
         robot.initAuto();
         Scheduler.reset();
-        robot.follower.setStartingPose(RedPoses.rcStart);
+        robot.follower.setStartingPose(RedPoses.rfStart);
 
     }
     @Override
@@ -35,7 +34,7 @@ public class nearRed extends OpMode
     @Override
     public void start()
     {
-        schedule(Commands.autoRoutine(Commands.RCSort3()));
+        //schedule(Commands.autoRoutine(Commands.dfSort3()));
     }
     @Override
     public void loop()

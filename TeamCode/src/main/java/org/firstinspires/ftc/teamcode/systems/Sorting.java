@@ -101,6 +101,8 @@ public class Sorting
         if(motif == Motif.PGP) vindexerABC();//b always contains green ball
         else if(motif == Motif.GPP) vindexerBAC();
         else if(motif == Motif.PPG) vindexerACB();
+        else vindexerABC();
+        waitTime(Transfer.feedWait);
     }
 
     public void waitTime(double time)

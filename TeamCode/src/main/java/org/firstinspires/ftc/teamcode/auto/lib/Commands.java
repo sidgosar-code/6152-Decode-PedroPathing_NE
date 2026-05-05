@@ -6,11 +6,10 @@ import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.groups.Groups.*;
 
 import org.firstinspires.ftc.teamcode.systems.CommandLib;
-import org.firstinspires.ftc.teamcode.systems.Transfer;
 
 public class Commands
 {
-    public static Command nearRedSort3()
+    public static Command RCSort3()
     {
         return sequential(
                 CommandLib.setShooter.with(CommandBuilder.moveBack),
@@ -37,6 +36,8 @@ public class Commands
                 CommandLib.stopAll
         );
     }
+
+
 
     public static Command autoRoutine(Command command)
     {
