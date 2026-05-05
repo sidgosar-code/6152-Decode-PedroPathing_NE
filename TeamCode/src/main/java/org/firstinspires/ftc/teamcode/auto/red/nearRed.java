@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.auto.red;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -14,6 +15,7 @@ import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.CurrentMotif;
 
 @Autonomous
+@Configurable
 public class nearRed extends OpMode
 {
     public RobotBase robot;
@@ -35,7 +37,7 @@ public class nearRed extends OpMode
     @Override
     public void start()
     {
-        schedule(Commands.autoRoutine(Commands.RCSort3()));
+        Scheduler.schedule(Commands.autoRoutine(Commands.RCSort3()));
     }
     @Override
     public void loop()
