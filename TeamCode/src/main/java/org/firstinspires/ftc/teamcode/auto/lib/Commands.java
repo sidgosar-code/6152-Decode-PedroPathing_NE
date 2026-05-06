@@ -12,9 +12,9 @@ public class Commands
     public static Command RCSort3()
     {
         return sequential(
-                CommandLib.setShooter.with(CommandBuilder.moveToShoot),
+                CommandLib.setShooter.with(CommandBuilder.moveToShoot).with(CommandLib.fullTransfer),
                 CommandLib.sort,
-                CommandBuilder.shootToCollect.with(CommandLib.stopShooter),
+                CommandBuilder.shootToCollect.with(CommandLib.stopAll),
                 parallel(
                         CommandBuilder.collect,
                         parallel(
