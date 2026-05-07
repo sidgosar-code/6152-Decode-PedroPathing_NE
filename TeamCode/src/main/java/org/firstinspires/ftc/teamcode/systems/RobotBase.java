@@ -34,28 +34,28 @@ public class RobotBase
 
     public Follower follower;
 
-    public com.qualcomm.robotcore.hardware.HardwareMap hardwareMap;
+    //public com.qualcomm.robotcore.hardware.HardwareMap hardwareMap;
 
 
     //constructor here
     public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry, Alliance alliance)
     {
-        this.hardwareMap = hardwareMap;
+        //this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
         CurrentAlliance.alliance = alliance;
-        initHardware();
+        initHardware(hardwareMap);
     }
 
     public RobotBase(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Telemetry telemetry)//for tests
     {
-        this.hardwareMap = hardwareMap;
+        //this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
         CurrentAlliance.alliance = Alliance.UNSELECTED;
-        initHardware();
+        initHardware(hardwareMap);
     }
 
 
-    public void initHardware()
+    public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
         transfer = new Transfer(hardwareMap, shooter);
         shooter = new Shooter(hardwareMap);
@@ -67,8 +67,22 @@ public class RobotBase
         telemetry1 = telemetry;
         timer = new ElapsedTime();
     }
-    public void initAuto()
+
+    public void initHardwareAuto(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
     {
+        transfer = new Transfer(hardwareMap, shooter);
+        shooter = new Shooter(hardwareMap);
+        turret = new Turret(hardwareMap, aprilTagUtility);
+        sorting = new Sorting(hardwareMap, transfer, aprilTagUtility);
+        intake = new Intake(hardwareMap, transfer);
+        //movement = new Movement(hardwareMap);
+        //this.telemetry = telemetry;
+        telemetry1 = telemetry;
+        timer = new ElapsedTime();
+    }
+    public void initAuto(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap)
+    {
+        initHardwareAuto(hardwareMap);
         aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
         CommandLib.create(this);
         pathBuilder = new PathBuilder(hardwareMap);
@@ -80,9 +94,9 @@ public class RobotBase
         telemetry.addData(caption, data);
         telemetry.update();
     }
-    public void setTelemetry(String caption, Motif motif)
+    public void setTelemetry(String caption, Object cur)
     {
-        telemetry.addData(caption, motif);
+        telemetry.addData(caption, cur);
         telemetry.update();
     }
     public void setTelemetry(String line)

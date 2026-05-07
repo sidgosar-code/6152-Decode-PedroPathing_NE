@@ -20,7 +20,7 @@ public class farRed extends OpMode
     public void init()
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
-        robot.initAuto();
+        robot.initAuto(hardwareMap);
         Scheduler.reset();
         robot.follower.setStartingPose(RedPoses.rfStart);
 

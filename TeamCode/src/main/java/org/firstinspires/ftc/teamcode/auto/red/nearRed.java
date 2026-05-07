@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.systems.RobotBase;
 import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.CurrentMotif;
 
-@Autonomous
+@Autonomous(name = "nearRed", group = "new")
 @Configurable
 public class nearRed extends OpMode
 {
@@ -23,17 +23,18 @@ public class nearRed extends OpMode
     public void init()
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
-        robot.initAuto();
+        robot.initAuto(hardwareMap);
         Scheduler.reset();
         robot.follower.setStartingPose(RedPoses.rcStart);
-
-    }
-    @Override
-    public void init_loop()
-    {
         CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
         robot.setTelemetry("motif", CurrentMotif.motif);
     }
+//    @Override
+//    public void init_loop()
+//    {
+//        CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
+//        robot.setTelemetry("motif", CurrentMotif.motif);
+//    }
     @Override
     public void start()
     {

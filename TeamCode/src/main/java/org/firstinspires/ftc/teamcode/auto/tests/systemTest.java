@@ -17,7 +17,7 @@ public class systemTest extends OpMode
     public void init()
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
-        robot.initAuto();
+        robot.initAuto(hardwareMap);
 
     }
     @Override
