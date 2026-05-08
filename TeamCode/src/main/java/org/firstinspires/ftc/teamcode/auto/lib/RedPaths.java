@@ -17,6 +17,20 @@ public class RedPaths
 
     public static Path RCEnd = new Path(new BezierLine(RedPoses.rcShoot, RedPoses.rcEnd));
 
+    public static Path RFForward = new Path(new BezierLine(RedPoses.rfStart, RedPoses.rfShoot));
+
+    public static Path RFShootToCollect = new Path(new BezierLine(RedPoses.rfShoot, RedPoses.rfCollect));
+
+    public static Path RFCollect = new Path(new BezierLine(RedPoses.rfCollect, RedPoses.rfCollectFinish));
+
+    public static Path RFCollectToShoot = new Path(new BezierLine(RedPoses.rfCollectFinish, RedPoses.rfShoot));
+
+    public static Path RFEnd = new Path(new BezierLine(RedPoses.rfShoot, RedPoses.rfEnd));
+
+
+
+
+
 
 
 

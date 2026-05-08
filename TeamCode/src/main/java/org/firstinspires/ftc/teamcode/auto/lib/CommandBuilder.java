@@ -13,11 +13,11 @@ public class CommandBuilder
     public CommandBuilder(PathBuilder pathBuilder)
     {
         this.follower = pathBuilder.follower;
-        pathBuilder.buildPathsRC();
-        buildCommandsRed();
+        //pathBuilder.buildPathsRC();
+        buildCommands();
     }
 
-    public void buildCommandsRed()
+    public void buildCommands()
     {
         moveToShoot = follow(follower, PathBuilder.moveToShoot);
         shootToCollect = follow(follower, PathBuilder.shootToCollect);

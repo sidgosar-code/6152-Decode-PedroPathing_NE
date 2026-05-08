@@ -9,4 +9,14 @@ public class BluePoses
     public static Pose bcCollect = RedPoses.rcCollect.getPose().mirror();
     public static Pose bcCollectFinish = RedPoses.rcCollectFinish.getPose().mirror();
     public static Pose bcEnd = RedPoses.rcEnd.getPose().mirror();
+
+    public static Pose bfStart = RedPoses.rfStart.getPose().mirror();
+
+    public static Pose bfShoot = RedPoses.rfShoot.getPose().mirror();
+    public static Pose bfCollect = RedPoses.rfCollect.getPose().mirror();
+    public static Pose bfCollectFinish = RedPoses.rfCollectFinish.getPose().mirror();
+
+    public static Pose bfEnd = RedPoses.rfEnd.getPose().mirror();
+
+
 }

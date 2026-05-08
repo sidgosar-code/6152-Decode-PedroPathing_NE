@@ -14,7 +14,18 @@ public class RedPoses
     public static Pose rcCollectFinish = new Pose(112, 83, rad(0));
     public static Pose rcEnd = new Pose(85, 115, rad(45));
 
-    public static Pose rfStart;
+    public static Pose rfStart = new Pose(88, 5, Math.toRadians(0));
+    public static Pose rfShoot = new Pose(88, 15, Math.toRadians(0));
+    public static Pose rfCollect = new Pose(103, 35, Math.toRadians(0));
+
+    public static Pose rfCollectFinish = new Pose(135, 35, Math.toRadians(0));
+    public static Pose rfEnd = new Pose(88, 40, Math.toRadians(0));
+
+
+
+
+
+
 
 
 

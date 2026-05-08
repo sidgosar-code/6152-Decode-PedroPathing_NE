@@ -13,6 +13,7 @@ public class Commands
     {
         return sequential(
                 CommandLib.setShooter.with(CommandBuilder.moveToShoot).with(CommandLib.fullTransfer),
+                waitMs(3000),
                 CommandLib.sort,
                 CommandBuilder.shootToCollect.with(CommandLib.stopAll),
                 parallel(
