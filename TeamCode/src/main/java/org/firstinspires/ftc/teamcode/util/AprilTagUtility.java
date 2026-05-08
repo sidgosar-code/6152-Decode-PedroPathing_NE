@@ -42,7 +42,7 @@ public class AprilTagUtility
         aprilTagProcessor = new AprilTagProcessor.Builder()
                 .setDrawAxes(false)
                 .setDrawCubeProjection(false)
-                .setDrawTagOutline(true)
+                .setDrawTagOutline(false)
                 //.setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11)
                 //.setTagLibrary(AprilTagGameDatabase.getCenterStageTagLibrary())
                 .setOutputUnits(DistanceUnit.CM, AngleUnit.DEGREES)
@@ -55,7 +55,7 @@ public class AprilTagUtility
 
         visionPortal = builder.build();
 
-        currentMotif = new CurrentMotif(getObeliskTag());
+        //currentMotif = new CurrentMotif(getObeliskTag());
     }
 
     public void update()

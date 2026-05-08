@@ -29,7 +29,7 @@ import org.firstinspires.ftc.teamcode.util.CurrentMotif;
 @Configurable
 public class nearRedInOne extends OpMode {
     public RobotBase robot;
-    public Follower follower;
+    private Follower follower;
 
     // Poses (from RedPoses)
     public static Pose rcStart = new Pose(123, 123, Math.toRadians(45));
@@ -58,7 +58,7 @@ public class nearRedInOne extends OpMode {
         
         // Ensure AprilTagUtility is initialized before subsystems to avoid NPEs
         robot.aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
-        robot.initHardwareAuto(hardwareMap);
+        //robot.initAuto(hardwareMap);
         
         follower = Constants.createFollower(hardwareMap);
         robot.follower = follower; // Link for robot.update()

@@ -24,17 +24,18 @@ public class nearRed extends OpMode
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
         robot.initAuto(hardwareMap);
+        robot.pathBuilder.buildPathsRC();
         Scheduler.reset();
         robot.follower.setStartingPose(RedPoses.rcStart);
-        CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
+        //CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
+
+    }
+    @Override
+    public void init_loop()
+    {
+        //CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
         robot.setTelemetry("motif", CurrentMotif.motif);
     }
-//    @Override
-//    public void init_loop()
-//    {
-//        CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
-//        robot.setTelemetry("motif", CurrentMotif.motif);
-//    }
     @Override
     public void start()
     {

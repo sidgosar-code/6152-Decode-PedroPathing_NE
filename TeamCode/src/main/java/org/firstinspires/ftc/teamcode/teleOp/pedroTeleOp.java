@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleOp;
 
+import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.teamcode.util.Alliance;
 @TeleOp(name="pedroTeleOp", group = "real OpModes")
 public class pedroTeleOp extends OpMode
 {
+    private Follower follower;
     public RobotBase robot;
     public Pose startingPose;
 

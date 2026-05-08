@@ -57,7 +57,8 @@ public class Transfer
         flicker.setPosition(flickerPush);
         while(timer.milliseconds()<flickWait)
         {
-            RobotBase.setTelemetry1("flicking");
+            //RobotBase.setTelemetry1("flicking");
+            int m = 5;
         }
         flicker.setPosition(flickerRest);
     }

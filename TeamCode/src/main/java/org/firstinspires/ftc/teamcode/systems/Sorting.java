@@ -15,9 +15,9 @@ public class Sorting
     public Servo vindexer;
     public Transfer transfer;
 
-    public static double A = 0.204;
-    public static double B = 0.271;
-    public static double C = 0.343;
+    public static double A = 0.2165;
+    public static double B = 0.286;
+    public static double C = 0.358;
 
     public ElapsedTime timer;
     public static double vindexerWaitTime = 500;
@@ -112,7 +112,7 @@ public class Sorting
         {
             int m = 4;
         }
-        RobotBase.setTelemetry1("Vindexer position", vindexer.getPosition());
+        //RobotBase.setTelemetry1("Vindexer position", vindexer.getPosition());
     }
 
 }
