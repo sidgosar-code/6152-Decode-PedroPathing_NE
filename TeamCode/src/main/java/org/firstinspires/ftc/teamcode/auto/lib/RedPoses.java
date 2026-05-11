@@ -7,7 +7,7 @@ import com.pedropathing.geometry.Pose;
 public class RedPoses
 {
     public static Pose rcStart = new Pose(123, 123, rad(45));
-    public static Pose rcShoot = new Pose (83, 83, rad(45));
+    public static Pose rcShoot = new Pose (96, 96, rad(45));
 
     public static Pose rcCollect = new Pose(103, 83, rad(0));
 

@@ -12,28 +12,31 @@ public class Commands
     public static Command RCSort3()
     {
         return sequential(
-                CommandLib.setShooter.with(CommandBuilder.moveToShoot).with(CommandLib.fullTransfer),
+                CommandLib.setShooter,
+                CommandBuilder.moveToShoot,
                 waitMs(3000),
-                CommandLib.sort,
-                CommandBuilder.shootToCollect.with(CommandLib.stopAll),
-                parallel(
-                        CommandBuilder.collect,
-                        parallel(
-                                CommandLib.startIntake,
-                                CommandLib.startIntakeTransferMode
-                        )
-                ),
-                CommandBuilder.collectToShoot.with(
-                        parallel(
-                                CommandLib.stopIntake,
-                                CommandLib.stopIntakeTransferMode
-                        )
-                ),
                 CommandLib.fullTransfer,
-                CommandLib.waitFeed,
-                CommandLib.flick,
-                CommandLib.waitFeed,
-                CommandBuilder.end,
+                CommandLib.sort,
+                waitMs(3000),
+                CommandBuilder.shootToCollect.with(CommandLib.stopAll),
+//                        parallel(
+//                                CommandBuilder.collect,
+//                                parallel(
+//                                        CommandLib.startIntake,
+//                                        CommandLib.startIntakeTransferMode
+//                                )
+//                        ),
+//                        CommandBuilder.collectToShoot.with(
+//                                parallel(
+//                                        CommandLib.stopIntake,
+//                                        CommandLib.stopIntakeTransferMode
+//                                )
+//                        ),
+//                        CommandLib.fullTransfer,
+//                        CommandLib.waitFeed,
+//                        CommandLib.flick,
+//                        CommandLib.waitFeed,
+//                        CommandBuilder.end,
                 CommandLib.stopAll
         );
     }

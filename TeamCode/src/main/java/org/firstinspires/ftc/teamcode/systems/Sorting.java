@@ -15,13 +15,15 @@ public class Sorting
     public Servo vindexer;
     public Transfer transfer;
 
-    public static double A = 0.2165;
-    public static double B = 0.286;
-    public static double C = 0.358;
+    public static double A = 0.358;
+    public static double B = 0.2165;
+    public static double C = 0.286;
 
     public ElapsedTime timer;
-    public static double vindexerWaitTime = 500;
-    public static double flickOneWaitTime = 500;
+    public static double vindexerWaitTime = 1600;
+    public static double flickOneWaitTime = 1000;
+
+    public static double prepTime = 1000;
 
     public Telemetry telemetry;
     public AprilTagUtility aprilTagUtility;
@@ -91,9 +93,10 @@ public class Sorting
 
     private void vindexerPositions(double pos1, double pos2, double pos3)
     {
-        vindexer.setPosition(pos1); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
-        vindexer.setPosition(pos2); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
-        vindexer.setPosition(pos3); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
+
+        vindexer.setPosition(pos1); waitTime(50);vindexer.setPosition(pos1); waitTime(prepTime); waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
+        vindexer.setPosition(pos2); waitTime(50);vindexer.setPosition(pos2);waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
+        vindexer.setPosition(pos3); waitTime(50);vindexer.setPosition(pos3);waitTime(vindexerWaitTime); transfer.flickOne(); waitTime(flickOneWaitTime);
     }
 
     public void sort()
