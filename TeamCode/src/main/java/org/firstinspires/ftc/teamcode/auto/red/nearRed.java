@@ -26,7 +26,7 @@ public class nearRed extends OpMode
         robot.initAuto(hardwareMap);
         robot.pathBuilder.buildPathsRC();
         Scheduler.reset();
-        robot.follower.setStartingPose(RedPoses.rcStart);
+        robot.follower.setStartingPose(RedPoses.rcCollect);
         //CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
 
     }
@@ -39,7 +39,7 @@ public class nearRed extends OpMode
     @Override
     public void start()
     {
-        Scheduler.schedule(Commands.autoRoutine(Commands.RCSort3()));
+        Scheduler.schedule(Commands.intake());
     }
     @Override
     public void loop()

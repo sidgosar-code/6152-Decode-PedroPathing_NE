@@ -11,7 +11,7 @@ public class CommandLib {
     // Subsystem Commands
     public static Command setShooter, stopShooter,
             startIntake, stopIntake, startIntakeTransferMode, startIntakeTransferMode1, stopIntakeTransferMode,
-            sort, waitFeed, flick,stopAll,
+            sort, waitFeed, flick,stopAll, vindexerA, switchMode,
             fullTransfer, stopTransfer;
 
 
@@ -28,6 +28,10 @@ public class CommandLib {
         stopIntakeTransferMode = instant(() -> robot.transfer.stopAll());
         stopIntake = instant(() -> robot.intake.stopIntake()).requiring(robot.intake.i);
         sort = instant(() -> robot.sorting.sort());
+
+
+        vindexerA = instant(() -> robot.sorting.vindexerA());
+        switchMode = instant(() -> robot.transfer.switchMode());
 
         flick = instant(() -> robot.transfer.flickOne());
         waitFeed = waitMs(Transfer.feedWait);

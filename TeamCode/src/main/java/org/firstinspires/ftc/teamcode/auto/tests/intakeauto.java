@@ -1,7 +1,9 @@
-package org.firstinspires.ftc.teamcode.auto.red;
+package org.firstinspires.ftc.teamcode.auto.tests;
+
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -13,7 +15,8 @@ import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.CurrentMotif;
 
 @Autonomous
-public class farRed extends OpMode
+@Configurable
+public class intakeauto extends OpMode
 {
     public RobotBase robot;
     @Override
@@ -21,9 +24,10 @@ public class farRed extends OpMode
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
         robot.initAuto(hardwareMap);
-        robot.pathBuilder.buildPathsRF();
+        robot.pathBuilder.buildPathsRC();
         Scheduler.reset();
-        robot.follower.setStartingPose(RedPoses.rfStart);
+        robot.follower.setStartingPose(RedPoses.rcCollect);
+        //CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
 
     }
     @Override
@@ -35,7 +39,7 @@ public class farRed extends OpMode
     @Override
     public void start()
     {
-        schedule(Commands.autoRoutine(Commands.RFSort3()));
+        Scheduler.schedule(Commands.intake());
     }
     @Override
     public void loop()

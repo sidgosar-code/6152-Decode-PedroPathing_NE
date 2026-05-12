@@ -5,6 +5,8 @@ import com.pedropathing.ivy.Command;
 
 import static com.pedropathing.ivy.pedro.PedroCommands.*;
 
+import org.firstinspires.ftc.teamcode.systems.Intake;
+
 public class CommandBuilder
 {
     public Follower follower;
@@ -21,7 +23,7 @@ public class CommandBuilder
     {
         moveToShoot = follow(follower, PathBuilder.moveToShoot);
         shootToCollect = follow(follower, PathBuilder.shootToCollect);
-        collect = follow(follower, PathBuilder.collect, 0.3);
+        collect = follow(follower, PathBuilder.collect, Intake.collectPower);
         collectToShoot = follow(follower, PathBuilder.collectToShoot);
         end = follow(follower, PathBuilder.end);
     }

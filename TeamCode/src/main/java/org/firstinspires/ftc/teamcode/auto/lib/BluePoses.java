@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.auto.lib;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.geometry.Pose;
 
+@Configurable
 public class BluePoses
 {
     public static Pose bcStart = RedPoses.rcStart.getPose().mirror();

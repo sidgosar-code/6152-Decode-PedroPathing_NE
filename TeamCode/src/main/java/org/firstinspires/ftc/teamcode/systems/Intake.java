@@ -15,9 +15,11 @@ public class Intake
     public static double max = 0.95;
     public static double out = -0.8;
      */
-    public static double reg = 1000;
-    public static double max = 1150;
+    public static double reg = 1250;
+    public static double max = 1400;
     public static double out = -1000;
+
+    public static double collectPower = 0.14;
 
     public static double P = 13;
     public static double F = 13;
