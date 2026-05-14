@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.teleOp;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -52,6 +51,8 @@ public class pedroTeleOp extends OpMode
         if(gamepad1.leftBumperWasPressed()) robot.turret.incLeft();
         if(gamepad1.right_trigger>0)robot.turret.crIncRight();
         if(gamepad1.left_trigger>0) robot.turret.crIncLeft();
+
+        if(gamepad1.xWasPressed()) robot.turret.aimNear(robot.follower.getPose());
 
         //switchMode
         if(gamepad2.rightStickButtonWasPressed()) robot.transfer.switchMode();

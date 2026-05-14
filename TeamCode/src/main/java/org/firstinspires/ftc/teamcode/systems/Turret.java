@@ -92,7 +92,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.AprilTagUtility;
-import org.firstinspires.ftc.teamcode.util.ConstantsHolder;
 import org.firstinspires.ftc.teamcode.util.CurrentAlliance;
 
 @Configurable
@@ -106,6 +105,8 @@ public class Turret
     public static double right = 0.18;
     public static double left = 0.58;
 
+
+    public static double turretSign = 1;
     public static double cameraShooterOffset = 7; //inches
 
     public double cameraAimAngle, aimAngle, aimPosition, distance, curPosition;
@@ -220,12 +221,12 @@ public class Turret
         updateCur();
     }
 
-    public void aim(Pose curPose)
+    public void aimNear(Pose curPose)
     {
         curPosition = center;
         aimAngle = Turret.poseToAngle(curPose);
-        if(CurrentAlliance.alliance == Alliance.RED) curPosition = center-angleToPosition(aimAngle);
-        if(CurrentAlliance.alliance == Alliance.BLUE) curPosition = center+angleToPosition(aimAngle);
+        if(CurrentAlliance.alliance == Alliance.RED) curPosition = center - turretSign * angleToPosition(aimAngle);
+        if(CurrentAlliance.alliance == Alliance.BLUE) curPosition = center + turretSign * angleToPosition(aimAngle);
         if(checkPosition(curPosition)) t.setPosition(curPosition);
         else t.setPosition(center);
         updateCur();
@@ -233,24 +234,38 @@ public class Turret
 
     public static double poseToAngle(Pose curPose)
     {
-        double curX = curPose.getX();
-        double curY = curPose.getY();
-        double curOffset = Math.toRadians(90) - curPose.getHeading();
-        double setAngle = Math.toRadians(90);
+//        double curX = curPose.getX();
+//        double curY = curPose.getY();
+//        double curOffset = Math.toRadians(90) - curPose.getHeading();
+//        double setAngle = Math.toRadians(90);
+//
+//
+//
+//        if(CurrentAlliance.alliance == Alliance.RED)
+//        {
+//            setAngle = Math.toRadians(90)-Math.abs(Math.atan2(ConstantsHolder.redGoal.getY()- curY, ConstantsHolder.redGoal.getX()-curX)) + curOffset;
+//        }
+//        if(CurrentAlliance.alliance == Alliance.BLUE)
+//        {
+//            setAngle = Math.toRadians(180)- Math.abs(Math.atan2(ConstantsHolder.blueGoal.getY()- curY, ConstantsHolder.blueGoal.getX()-curX)) - curOffset;
+//        }
+//
+//        setAngle = Math.toDegrees(setAngle);
+//        return setAngle;
 
-
+        double angle = 0;
+        double heading = Math.toDegrees(curPose.getHeading());
 
         if(CurrentAlliance.alliance == Alliance.RED)
         {
-            setAngle = Math.toRadians(90)-Math.abs(Math.atan2(ConstantsHolder.redGoal.getY()- curY, ConstantsHolder.redGoal.getX()-curX)) + curOffset;
+            angle = 45 - heading;
         }
-        if(CurrentAlliance.alliance == Alliance.BLUE)
+        else if(CurrentAlliance.alliance == Alliance.BLUE)
         {
-            setAngle = Math.toRadians(180)- Math.abs(Math.atan2(ConstantsHolder.blueGoal.getY()- curY, ConstantsHolder.blueGoal.getX()-curX)) - curOffset;
+            angle = 135 - heading;
         }
 
-        setAngle = Math.toDegrees(setAngle);
-        return setAngle;
+        return angle;
 
     }
 
