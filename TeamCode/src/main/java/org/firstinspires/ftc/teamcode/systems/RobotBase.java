@@ -160,4 +160,9 @@ public class RobotBase
         }
         telemetry.update();
     }
+
+    public void zeroHeading()
+    {
+        follower.setHeading(Math.PI/2);
+    }
 }

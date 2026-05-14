@@ -9,8 +9,8 @@ import org.firstinspires.ftc.teamcode.systems.Movement;
 import org.firstinspires.ftc.teamcode.systems.RobotBase;
 import org.firstinspires.ftc.teamcode.util.Alliance;
 
-@TeleOp(name="pedroTeleOp", group = "real OpModes")
-public class pedroTeleOp extends OpMode
+@TeleOp(name="pedroTeleOpRed", group = "real OpModes")
+public class pedroTeleOpRed extends OpMode
 {
     private Follower follower;
     public RobotBase robot;
@@ -31,6 +31,9 @@ public class pedroTeleOp extends OpMode
     @Override
     public void loop()
     {
+        if(gamepad1.dpadUpWasPressed()) robot.zeroHeading();//zero heading
+
+
         if (!gamepad1.y) robot.follower.setTeleOpDrive(
                 -gamepad1.left_stick_y,
                 -gamepad1.left_stick_x,
