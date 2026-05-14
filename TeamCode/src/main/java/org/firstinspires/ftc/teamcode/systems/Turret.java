@@ -115,6 +115,8 @@ public class Turret
     public static double crIncrement = 0.002;
     public static double turretMultiplier = 1;
     public static double hoodMin = 0.67;
+
+    public static double hoodMid = 0.635;
     public static double hoodMax = 0.60;
     public CurrentAlliance currentAlliance;
     public Turret(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, AprilTagUtility aprilTagUtility)
@@ -128,6 +130,8 @@ public class Turret
 
     public void hoodHigh(){hood1.setPosition(hoodMax);}
     public void hoodLow(){hood1.setPosition(hoodMin);}
+
+    public void hoodReg(){hood1.setPosition(hoodMid);}
 
     public void update()
     {

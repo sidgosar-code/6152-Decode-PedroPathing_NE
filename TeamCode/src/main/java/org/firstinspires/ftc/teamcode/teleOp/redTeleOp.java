@@ -96,6 +96,7 @@ public class redTeleOp extends OpMode
         //hood
         if(gamepad2.dpadDownWasPressed()) robot.turret.hoodLow();
         if(gamepad2.dpadUpWasPressed()) robot.turret.hoodHigh();
+        else robot.turret.hoodReg();
     }
 
     /*
