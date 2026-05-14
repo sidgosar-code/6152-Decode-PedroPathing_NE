@@ -4,15 +4,18 @@ import static com.pedropathing.ivy.commands.Commands.instant;
 import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.groups.Groups.parallel;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.ivy.Command;
 
-
+@Configurable
 public class CommandLib {
     // Subsystem Commands
     public static Command setShooter, stopShooter,
             startIntake, stopIntake, startIntakeTransferMode, startIntakeTransferMode1, stopIntakeTransferMode,
             sort, waitFeed, flick,stopAll, vindexerA, switchMode,
             fullTransfer, stopTransfer;
+
+
 
 
     /**

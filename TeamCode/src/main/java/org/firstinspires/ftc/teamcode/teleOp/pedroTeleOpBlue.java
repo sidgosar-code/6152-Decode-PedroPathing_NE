@@ -104,9 +104,11 @@ public class pedroTeleOpBlue extends OpMode
         //if(robot.transfer.spamMode && gamepad2.xWasPressed()) robot.farZoneShoot3();
         if(gamepad2.dpadUpWasPressed()) robot.stopAll(); //gonna have to change this
 
-        //hood
-//        if(gamepad2.dpadDownWasPressed()) robot.turret.hoodLow();
-//        if(gamepad2.dpadUpWasPressed()) robot.turret.hoodHigh();
+        ///hood
+        //if(gamepad2.dpadDownWasPressed()) robot.turret.hoodLow();
+        //if(gamepad2.dpadUpWasPressed()) robot.turret.hoodHigh();
+        //else robot.turret.hoodReg();
+        robot.turret.hoodSet();
 //        robot.setTelemetry("position", robot.follower.getPose());
 //        robot.setTelemetry("velocity", robot.follower.getVelocity());
     }

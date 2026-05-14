@@ -20,7 +20,7 @@ public class Shooter
 
     public static double error = 250;
 
-    public static double maxVelocity = 1700, midVelocity = 1375, minVelocity = 1125;
+    public static double maxVelocity = 1700, midVelocity = 1345, minVelocity = 1125;
     public double curTarget;
     public static double[] speeds = {minVelocity, midVelocity, maxVelocity};
     public int speedIndex = 1;
@@ -69,7 +69,6 @@ public class Shooter
     {
         curTarget = midVelocity;
         set();
-
         //if(curVelocity==minVelocity) curVelocity = midVelocity;
         //else if(curVelocity == midVelocity) curVelocity = farVelocity;
         //else curVelocity = minVelocity;

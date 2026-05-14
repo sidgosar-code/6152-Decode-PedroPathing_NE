@@ -26,9 +26,11 @@ public class Transfer
 
     public static final double flickerRest = 0.625;
     public static final double flickerPush = flickerRest + 0.125;
-    public static double flickWait = 500; //time to wait for flickerPush, in ms
+    public static double flickWait = 400; //time to wait for flickerPush, in ms
     public static double feedWait = 100; //time for one ball to be fed to shooter, in ms
     public ElapsedTime timer;
+
+    public static double waitShoot = 3000, sortTime = 3000;
     Telemetry telemetry;
 
     public Transfer(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, Shooter shooter)

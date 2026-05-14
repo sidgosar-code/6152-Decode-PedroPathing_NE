@@ -35,7 +35,8 @@ public class farRed extends OpMode
     @Override
     public void start()
     {
-        schedule(Commands.autoRoutine(Commands.RFSort3()));
+        schedule(Commands.autoRoutine(Commands.fSort3()));
+        robot.aprilTagUtility.stop();
     }
     @Override
     public void loop()

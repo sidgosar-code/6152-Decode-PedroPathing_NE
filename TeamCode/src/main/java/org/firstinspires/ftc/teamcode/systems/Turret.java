@@ -118,11 +118,14 @@ public class Turret
 
     public static double hoodMid = 0.635;
     public static double hoodMax = 0.60;
+
+    public Shooter shooter;
     public CurrentAlliance currentAlliance;
-    public Turret(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, AprilTagUtility aprilTagUtility)
+    public Turret(com.qualcomm.robotcore.hardware.HardwareMap hardwareMap, AprilTagUtility aprilTagUtility, Shooter shooter)
     {
         t = hardwareMap.get(Servo.class, "turret");
         hood1 = hardwareMap.get(Servo.class, "hood1");
+        this.shooter = shooter;
         this.aprilTagUtility = aprilTagUtility;
         aimPosition = center;
         curPosition = center;
@@ -177,6 +180,15 @@ public class Turret
         if(checkPosition(aimPosition)) t.setPosition(aimPosition);
         return aimPosition;
     }
+
+
+    public void hoodSet()
+    {
+        if(shooter.curTarget>Shooter.midVelocity) hoodHigh();
+        else if (shooter.curTarget<Shooter.midVelocity) hoodLow();
+        else hoodReg();
+    }
+
 
     public void center()
     {

@@ -6,21 +6,20 @@ import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.groups.Groups.*;
 
 import org.firstinspires.ftc.teamcode.systems.CommandLib;
-
-import java.nio.file.Path;
+import org.firstinspires.ftc.teamcode.systems.Transfer;
 
 public class Commands
 {
-    public static Command RCSort3()
+    public static Command cSort3()
     {
         return sequential(
                 CommandLib.setShooter,
                 CommandBuilder.moveToShoot,
-                waitMs(3000),
+                waitMs(Transfer.waitShoot),
                 CommandLib.fullTransfer,
                 CommandLib.sort,
-                waitMs(3000),
-                CommandBuilder.shootToCollect.with(CommandLib.stopAll),
+                waitMs(Transfer.sortTime),
+                CommandBuilder.end.with(CommandLib.stopAll),
 //                        parallel(
 //                                CommandBuilder.collect,
 //                                parallel(
@@ -43,6 +42,10 @@ public class Commands
         );
     }
 
+
+
+
+
     public static Command intake()
     {
         return sequential(
@@ -57,16 +60,16 @@ public class Commands
     }
 
 
-    public static Command RFSort3()
+    public static Command fSort3()
     {
         return sequential(
                 //CommandLib.setShooter,
                 CommandBuilder.moveToShoot,
-                waitMs(3000),
+                waitMs(Transfer.waitShoot),
                 CommandLib.fullTransfer,
                 CommandLib.sort,
-                waitMs(3000),
-                //CommandBuilder.shootToCollect.with(CommandLib.stopAll),
+                waitMs(Transfer.sortTime),
+                CommandBuilder.end.with(CommandLib.stopAll),
 //                        parallel(
 //                                CommandBuilder.collect,
 //                                parallel(

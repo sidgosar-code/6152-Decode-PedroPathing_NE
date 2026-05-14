@@ -27,8 +27,6 @@ public class AprilTagUtility
     public List<AprilTagDetection> detectedTags = new ArrayList<>();
     public Telemetry telemetry;
 
-    public CurrentMotif currentMotif;
-
 
     public AprilTagUtility(HardwareMap hardwareMap, Telemetry telemetry)
     {
@@ -54,21 +52,19 @@ public class AprilTagUtility
         builder.addProcessor(aprilTagProcessor);
 
         visionPortal = builder.build();
-
-        //currentMotif = new CurrentMotif(getObeliskTag());
     }
+
+
+//    public void off()
+//    {
+//        visionPortal.close();
+//    }
 
     public void update()
     {
         detectedTags = aprilTagProcessor.getDetections();
-        goalTag = getTagByID(goalID);
-
-        telemetry.addData("camera status", visionPortal.getCameraState());
-        telemetry.addData("motif", CurrentMotif.motif);
-        telemetry.update();
-
-
     }
+
     public void displayDetectionTelemetry(AprilTagDetection detectedId)
     {
         if(detectedId == null) return;
@@ -84,6 +80,7 @@ public class AprilTagUtility
     }   // end for() loop
 
 
+
     public List<AprilTagDetection> getDetectedTags()
     {
         return detectedTags;
@@ -91,7 +88,6 @@ public class AprilTagUtility
 
     public AprilTagDetection getTagByID(int iD)
     {
-        update();
         for(AprilTagDetection detection : detectedTags)
         {
             if(detection.id == iD)
@@ -101,20 +97,18 @@ public class AprilTagUtility
         }
         return null;
     }
-    public int getTag()
-    {
-        update();
-        for(AprilTagDetection detection : detectedTags)
-        {
-            if(detection.metadata != null) return detection.id;
-
-        }
-        return 0;
-    }
+//    public int getTag()
+//    {
+//        for(AprilTagDetection detection : detectedTags)
+//        {
+//            if(detection.metadata != null) return detection.id;
+//
+//        }
+//        return 0;
+//    }
 
     public int getObeliskTag()
     {
-        update();
         int id = 0;
         for(AprilTagDetection detection : detectedTags)
         {
@@ -140,7 +134,6 @@ public class AprilTagUtility
 
     public double getDistanceToGoal()
     {
-        update();
         goalTag = getTagByID(goalID);
         if(goalTag != null)//check if tag is the goal ID
         {
@@ -151,7 +144,6 @@ public class AprilTagUtility
 
     public double getAngleToGoal()
     {
-        update();
         goalTag = getTagByID(goalID);
         if(goalTag != null)//check if tag is the goal ID
         {

@@ -1,22 +1,19 @@
-package org.firstinspires.ftc.teamcode.auto.red;
-
+package org.firstinspires.ftc.teamcode.auto.blue;
 
 import static com.pedropathing.ivy.Scheduler.schedule;
 
-import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.ivy.Scheduler;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.auto.lib.BluePoses;
 import org.firstinspires.ftc.teamcode.auto.lib.Commands;
-import org.firstinspires.ftc.teamcode.auto.lib.RedPoses;
 import org.firstinspires.ftc.teamcode.systems.RobotBase;
 import org.firstinspires.ftc.teamcode.util.Alliance;
 import org.firstinspires.ftc.teamcode.util.CurrentMotif;
 
-@Autonomous(name = "nearRed", group = "new")
-@Configurable
-public class nearRed extends OpMode
+@Autonomous
+public class farBlue extends OpMode
 {
     public RobotBase robot;
     @Override
@@ -24,10 +21,9 @@ public class nearRed extends OpMode
     {
         robot = new RobotBase(hardwareMap, telemetry, Alliance.RED);
         robot.initAuto(hardwareMap);
-        robot.pathBuilder.buildPathsRC();
+        robot.pathBuilder.buildPathsBF();
         Scheduler.reset();
-        robot.follower.setStartingPose(RedPoses.rcCollect);
-        //CurrentMotif.update(robot.aprilTagUtility.getObeliskTag());
+        robot.follower.setStartingPose(BluePoses.bfStart);
 
     }
     @Override
@@ -39,7 +35,7 @@ public class nearRed extends OpMode
     @Override
     public void start()
     {
-        Scheduler.schedule(Commands.cSort3());
+        schedule(Commands.autoRoutine(Commands.fSort3()));
         robot.aprilTagUtility.stop();
     }
     @Override

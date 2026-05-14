@@ -52,7 +52,7 @@ public class RobotBase
         //aprilTagUtility = new AprilTagUtility(hardwareMap, telemetry);
         shooter = new Shooter(hardwareMap);
         transfer = new Transfer(hardwareMap, shooter);
-        turret = new Turret(hardwareMap, aprilTagUtility);
+        turret = new Turret(hardwareMap, aprilTagUtility, shooter);
         sorting = new Sorting(hardwareMap, transfer, aprilTagUtility);
         intake = new Intake(hardwareMap, transfer);
         movement = new Movement(hardwareMap);
@@ -66,7 +66,7 @@ public class RobotBase
         
         shooter = new Shooter(hardwareMap);
         transfer = new Transfer(hardwareMap, shooter);
-        turret = new Turret(hardwareMap, aprilTagUtility);
+        turret = new Turret(hardwareMap, aprilTagUtility, shooter);
         sorting = new Sorting(hardwareMap, transfer, aprilTagUtility);
         intake = new Intake(hardwareMap, transfer);
         
