@@ -90,6 +90,12 @@ public class Commands
     }
 
 
+    public static Command shoot()
+    {
+        return null;
+    }
+
+
 
     public static Command autoRoutine(Command command)
     {
