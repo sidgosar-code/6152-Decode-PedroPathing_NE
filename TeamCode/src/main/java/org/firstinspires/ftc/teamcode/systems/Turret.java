@@ -167,8 +167,7 @@ public class Turret
 
     private static double angleToPosition(double angle)
     {
-        angle = Math.abs(angle);
-        double position = angle / 1800.0 * turretMultiplier * (88.0/17.0);
+        double position = angle * 11.0 / 3285.0;
         return position;
     }
 
@@ -176,7 +175,7 @@ public class Turret
     {
         update();
         if(CurrentAlliance.alliance == Alliance.RED) aimPosition = center - angleToPosition(aimAngle);
-        if(CurrentAlliance.alliance == Alliance.BLUE) aimPosition = center + angleToPosition(aimAngle);
+        if(CurrentAlliance.alliance == Alliance.BLUE) aimPosition = center - angleToPosition(aimAngle);
         if(checkPosition(aimPosition)) t.setPosition(aimPosition);
         return aimPosition;
     }
@@ -242,7 +241,7 @@ public class Turret
         curPosition = center;
         aimAngle = Turret.poseToAngle(curPose);
         if(CurrentAlliance.alliance == Alliance.RED) curPosition = center - turretSign * angleToPosition(aimAngle);
-        if(CurrentAlliance.alliance == Alliance.BLUE) curPosition = center + turretSign * angleToPosition(aimAngle);
+        if(CurrentAlliance.alliance == Alliance.BLUE) curPosition = center - turretSign * angleToPosition(aimAngle);
         if(checkPosition(curPosition)) t.setPosition(curPosition);
         else t.setPosition(center);
         updateCur();
@@ -250,41 +249,40 @@ public class Turret
 
     public static double poseToAngle(Pose curPose)
     {
-//        double curX = curPose.getX();
-//        double curY = curPose.getY();
-//        double curOffset = Math.toRadians(90) - curPose.getHeading();
-//        double setAngle = Math.toRadians(90);
-//
-//
-//
-//        if(CurrentAlliance.alliance == Alliance.RED)
-//        {
-//            setAngle = Math.toRadians(90)-Math.abs(Math.atan2(ConstantsHolder.redGoal.getY()- curY, ConstantsHolder.redGoal.getX()-curX)) + curOffset;
-//        }
-//        if(CurrentAlliance.alliance == Alliance.BLUE)
-//        {
-//            setAngle = Math.toRadians(180)- Math.abs(Math.atan2(ConstantsHolder.blueGoal.getY()- curY, ConstantsHolder.blueGoal.getX()-curX)) - curOffset;
-//        }
-//
-//        setAngle = Math.toDegrees(setAngle);
-//        return setAngle;
-
-        double angle = 0;
-        double heading = Math.toDegrees(curPose.getHeading());
+        double curX = curPose.getX();
+        double curY = curPose.getY();
+        double curH = curPose.getHeading();
+        double curOffset = Math.toRadians(90) - curH;
+        double setAngle = Math.toRadians(90);
 
         if(CurrentAlliance.alliance == Alliance.RED)
         {
-            angle = 45 - heading;
+            setAngle = Math.toRadians(90)-Math.abs(Math.atan2(139.6 - curY - 4.5*Math.sin(curH), 142.2 - curX - 4.5*Math.cos(curH)));
+            setAngle = curH - setAngle;
         }
-        else if(CurrentAlliance.alliance == Alliance.BLUE)
+        if(CurrentAlliance.alliance == Alliance.BLUE)
         {
-            angle = 135 - heading;
+            setAngle = Math.toRadians(180)- Math.abs(Math.atan2(139.6 - curY - 4.5*Math.sin(curH), 1.8 - curX - 4.5*Math.cos(curH)));
+            setAngle = curH - setAngle - Math.toRadians(90);
         }
 
-        return angle;
+        setAngle = Math.toDegrees(setAngle);
+        if(setAngle>71.2) {setAngle = 71.2;} if(setAngle<-67.8) {setAngle = -67.8;}
+        return setAngle;
 
+//        double angle = 0;
+//        double heading = Math.toDegrees(curPose.getHeading());
+//
+ //        if(CurrentAlliance.alliance == Alliance.RED)
+//        {
+//            angle = 45 - heading;
+//        }
+//        else if(CurrentAlliance.alliance == Alliance.BLUE)
+//        {
+//            angle = 135 - heading;
+//        }
+//
+ //        return angle;
     }
-
-
 
 }
